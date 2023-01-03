@@ -1,0 +1,16 @@
+{
+  "name": "dreamlo-leaderboard-javascript",
+  "version": "1.0.0",
+  "description": "Interact with the dreamlo leaderboard API using Javascript.",
+  "main": "dist/dreamlo.js",
+  "keywords": [
+    "dreamlo",
+    "unity",
+    "leaderboard"
+  ],
+  "author": "JMHeartley",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
