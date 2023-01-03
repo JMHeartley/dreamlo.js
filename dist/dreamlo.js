@@ -19,6 +19,11 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.getScoresJson = getScoresJson;
+    function getScoresPipe() {
+        const url = _baseUrl + "/pipe";
+        return _get(url);
+    }
+    DreamLo.getScoresPipe = getScoresPipe;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
