@@ -18,6 +18,10 @@ namespace DreamLo {
         const url = _baseUrl + "/pipe";
         return _get(url);
     }
+    export function getScoresQuote(): string {
+        const url = _baseUrl + "/quote";
+        return _get(url);
+    }
     function _get(url: string): string {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
