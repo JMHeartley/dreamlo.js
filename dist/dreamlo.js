@@ -10,11 +10,14 @@ var DreamLo;
         _publicKey = publicKey;
     }
     DreamLo.initialize = initialize;
-    function getScores(format) {
+    function getScores(format, sortOrder = SortOrder.ScoreDescending, start = 0, count) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
-        const url = _baseUrl + _publicKey + "/" + format;
+        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + start;
+        if (count) {
+            url += "/" + count;
+        }
         return _get(url);
     }
     DreamLo.getScores = getScores;
@@ -40,5 +43,14 @@ var DreamLo;
         ScoreFormat["Pipe"] = "pipe";
         ScoreFormat["Quote"] = "quote";
     })(ScoreFormat = DreamLo.ScoreFormat || (DreamLo.ScoreFormat = {}));
+    let SortOrder;
+    (function (SortOrder) {
+        SortOrder["ScoreDescending"] = "";
+        SortOrder["ScoreAscending"] = "-asc";
+        SortOrder["SecondsDescending"] = "-seconds";
+        SortOrder["SecondsAscending"] = "-seconds-asc";
+        SortOrder["DateDescending"] = "-date";
+        SortOrder["DateAscending"] = "-date-asc";
+    })(SortOrder = DreamLo.SortOrder || (DreamLo.SortOrder = {}));
 })(DreamLo || (DreamLo = {}));
 //# sourceMappingURL=dreamlo.js.map

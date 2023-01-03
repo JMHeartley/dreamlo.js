@@ -7,11 +7,16 @@ namespace DreamLo {
         }
         _publicKey = publicKey;
     }
-    export function getScores(format: ScoreFormat): string {
+    export function getScores(format: ScoreFormat, sortOrder: SortOrder = SortOrder.ScoreDescending, start: number = 0, count?: number): string {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
-        const url = _baseUrl + _publicKey + "/" + format;
+
+        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + start;
+        if (count) {
+            url += "/" + count;
+        }
+
         return _get(url);
     }
     function _get(url: string): string {
@@ -35,5 +40,13 @@ namespace DreamLo {
         Json = "json",
         Pipe = "pipe",
         Quote = "quote"
+    }
+    export enum SortOrder {
+        ScoreDescending = "",
+        ScoreAscending = "-asc",
+        SecondsDescending = "-seconds",
+        SecondsAscending = "-seconds-asc",
+        DateDescending = "-date",
+        DateAscending = "-date-asc"
     }
 }
