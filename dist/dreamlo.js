@@ -11,19 +11,29 @@ var DreamLo;
     DreamLo.initialize = initialize;
     function getScoresXml() {
         const url = _baseUrl + "/xml";
+        return _get(url);
+    }
+    DreamLo.getScoresXml = getScoresXml;
+    function getScoresJson() {
+        const url = _baseUrl + "/json";
+        return _get(url);
+    }
+    DreamLo.getScoresJson = getScoresJson;
+    function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
-        let xml = "";
-        request.onload = function () {
+        let data = "";
+        request.onload = () => {
             if (request.status >= 200 && request.status < 400) {
-                xml = request.responseText;
-                console.log(xml);
+                data = request.responseText;
+            }
+            else {
+                console.log("DreamLo request returned: " + request.status + " " + request.statusText);
             }
         };
         request.send();
-        return xml;
+        return data;
     }
-    DreamLo.getScoresXml = getScoresXml;
 })(DreamLo || (DreamLo = {}));
 ;
 //# sourceMappingURL=dreamlo.js.map

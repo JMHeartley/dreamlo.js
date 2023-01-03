@@ -8,18 +8,26 @@ namespace DreamLo {
     }
     export function getScoresXml(): string {
         const url = _baseUrl + "/xml";
+        return _get(url);
+    }
+    export function getScoresJson(): string {
+        const url = _baseUrl + "/json";
+        return _get(url);
+    }
+    function _get(url: string): string {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
 
-        let xml = "";
+        let data = "";
         request.onload = () => {
             if (request.status >= 200 && request.status < 400) {
-                xml = request.responseText;
+                data = request.responseText;
             }
-            console.log("DreamLo request returned: " + request.status + " " + request.statusText);
+            else {
+                console.log("DreamLo request returned: " + request.status + " " + request.statusText);
+            }
         };
         request.send();
-
-        return xml;
+        return data;
     }
 };
