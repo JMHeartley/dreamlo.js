@@ -2,33 +2,22 @@
 var DreamLo;
 (function (DreamLo) {
     let _baseUrl = "http://dreamlo.com/lb/";
-    function initialize(privateKey, useHttps = false) {
+    let _publicKey = "";
+    function initialize(publicKey, useHttps = false) {
         if (useHttps) {
             _baseUrl = _baseUrl.replace("http://", "https://");
         }
-        _baseUrl += privateKey;
+        _publicKey = publicKey;
     }
     DreamLo.initialize = initialize;
-    function getScoresXml() {
-        const url = _baseUrl + "/xml";
+    function getScores(format) {
+        if (_publicKey === "") {
+            throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+        }
+        const url = _baseUrl + _publicKey + "/" + format;
         return _get(url);
     }
-    DreamLo.getScoresXml = getScoresXml;
-    function getScoresJson() {
-        const url = _baseUrl + "/json";
-        return _get(url);
-    }
-    DreamLo.getScoresJson = getScoresJson;
-    function getScoresPipe() {
-        const url = _baseUrl + "/pipe";
-        return _get(url);
-    }
-    DreamLo.getScoresPipe = getScoresPipe;
-    function getScoresQuote() {
-        const url = _baseUrl + "/quote";
-        return _get(url);
-    }
-    DreamLo.getScoresQuote = getScoresQuote;
+    DreamLo.getScores = getScores;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
@@ -44,6 +33,12 @@ var DreamLo;
         request.send();
         return data;
     }
+    let ScoreFormat;
+    (function (ScoreFormat) {
+        ScoreFormat["Xml"] = "xml";
+        ScoreFormat["Json"] = "json";
+        ScoreFormat["Pipe"] = "pipe";
+        ScoreFormat["Quote"] = "quote";
+    })(ScoreFormat = DreamLo.ScoreFormat || (DreamLo.ScoreFormat = {}));
 })(DreamLo || (DreamLo = {}));
-;
 //# sourceMappingURL=dreamlo.js.map

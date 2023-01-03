@@ -1,28 +1,17 @@
 namespace DreamLo {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
-    let _privateKey = "";
-    export function initialize(publicKey: string, privateKey: string, useHttps = false): void {
+    export function initialize(publicKey: string, useHttps = false): void {
         if (useHttps) {
             _baseUrl = _baseUrl.replace("http://", "https://");
         }
         _publicKey = publicKey;
-        _privateKey = privateKey;
     }
-    export function getScoresXml(): string {
-        const url = _baseUrl + _publicKey + "/xml";
-        return _get(url);
-    }
-    export function getScoresJson(): string {
-        const url = _baseUrl + _publicKey + "/json";
-        return _get(url);
-    }
-    export function getScoresPipe(): string {
-        const url = _baseUrl + _publicKey + "/pipe";
-        return _get(url);
-    }
-    export function getScoresQuote(): string {
-        const url = _baseUrl + _publicKey + "/quote";
+    export function getScores(format: ScoreFormat): string {
+        if (_publicKey === "") {
+            throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+        }
+        const url = _baseUrl + _publicKey + "/" + format;
         return _get(url);
     }
     function _get(url: string): string {
@@ -41,4 +30,10 @@ namespace DreamLo {
         request.send();
         return data;
     }
-};
+    export enum ScoreFormat {
+        Xml = "xml",
+        Json = "json",
+        Pipe = "pipe",
+        Quote = "quote"
+    }
+}
