@@ -21,6 +21,14 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.getScores = getScores;
+    function getScore(format, name) {
+        if (_publicKey === "") {
+            throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+        }
+        let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+        return _get(url);
+    }
+    DreamLo.getScore = getScore;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
