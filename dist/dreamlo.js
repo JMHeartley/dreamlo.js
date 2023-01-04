@@ -58,7 +58,7 @@ var dreamLo;
     dreamLo.getScore = getScore;
     function addScore(score, format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending) {
         var _a;
-        if (_privateKey === "") {
+        if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
         if (!score.name) {
@@ -75,7 +75,7 @@ var dreamLo;
     }
     dreamLo.addScore = addScore;
     function deleteScores() {
-        if (_privateKey === "") {
+        if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
         const url = _baseUrl + _privateKey + "/clear";
@@ -83,7 +83,7 @@ var dreamLo;
     }
     dreamLo.deleteScores = deleteScores;
     function deleteScore(name) {
-        if (_privateKey === "") {
+        if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
         if (!name) {

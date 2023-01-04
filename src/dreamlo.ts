@@ -37,7 +37,7 @@ namespace dreamLo {
         return _get(url);
     }
     export function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending): string {
-        if (_privateKey === "") {
+        if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
         if (!score.name) {
@@ -55,7 +55,7 @@ namespace dreamLo {
         return _get(url);
     }
     export function deleteScores(): void {
-        if (_privateKey === "") {
+        if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
 
@@ -63,7 +63,7 @@ namespace dreamLo {
         _get(url);
     }
     export function deleteScore(name: string): void {
-        if (_privateKey === "") {
+        if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
         if (!name) {
