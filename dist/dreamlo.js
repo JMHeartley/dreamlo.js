@@ -80,6 +80,9 @@ var dreamLo;
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
+        if (!name) {
+            throw new Error("DreamLo deleteScore name parameter is required.");
+        }
         const url = _baseUrl + _privateKey + "/delete/" + name;
         _get(url);
     }
