@@ -12,7 +12,7 @@ var DreamLo;
         _privateKey = privateKey;
     }
     DreamLo.initialize = initialize;
-    function getScores(format, sortOrder = SortOrder.PointsDescending, start = 0, count) {
+    function getScores(format = ScoreFormat.Json, sortOrder = SortOrder.PointsDescending, start = 0, count) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -23,7 +23,7 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.getScores = getScores;
-    function getScore(format, name) {
+    function getScore(format = ScoreFormat.Json, name) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -31,16 +31,16 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.getScore = getScore;
-    function addScore(score) {
+    function addScore(score, format = ScoreFormat.Json, sortOrder = SortOrder.PointsDescending) {
         var _a;
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
-        let url = (_a = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points + "/" + score.seconds) !== null && _a !== void 0 ? _a : "";
+        let url = (_a = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds) !== null && _a !== void 0 ? _a : "";
         if (score.text) {
             url += "/" + score.text;
         }
-        _get(url);
+        return _get(url);
     }
     DreamLo.addScore = addScore;
     function _get(url) {
@@ -60,8 +60,8 @@ var DreamLo;
     }
     let ScoreFormat;
     (function (ScoreFormat) {
-        ScoreFormat["Xml"] = "xml";
         ScoreFormat["Json"] = "json";
+        ScoreFormat["Xml"] = "xml";
         ScoreFormat["Pipe"] = "pipe";
         ScoreFormat["Quote"] = "quote";
     })(ScoreFormat = DreamLo.ScoreFormat || (DreamLo.ScoreFormat = {}));

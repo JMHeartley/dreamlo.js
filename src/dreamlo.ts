@@ -10,7 +10,7 @@ namespace DreamLo {
         _publicKey = publicKey;
         _privateKey = privateKey;
     }
-    export function getScores(format: ScoreFormat, sortOrder: SortOrder = SortOrder.PointsDescending, start: number = 0, count?: number): string {
+    export function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, start: number = 0, count?: number): string {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -22,7 +22,7 @@ namespace DreamLo {
 
         return _get(url);
     }
-    export function getScore(format: ScoreFormat, name: string): string {
+    export function getScore(format: ScoreFormat = ScoreFormat.Json, name: string): string {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -31,7 +31,7 @@ namespace DreamLo {
 
         return _get(url);
     }
-    export function addScore(score: Score, format: ScoreFormat, sortOrder: SortOrder = SortOrder.PointsDescending): string {
+    export function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending): string {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
@@ -60,8 +60,8 @@ namespace DreamLo {
         return data;
     }
     export enum ScoreFormat {
-        Xml = "xml",
         Json = "json",
+        Xml = "xml",
         Pipe = "pipe",
         Quote = "quote"
     }
