@@ -43,6 +43,14 @@ namespace DreamLo {
 
         return _get(url);
     }
+    export function deleteScores(): void {
+        if (_privateKey === "") {
+            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+        }
+
+        const url = _baseUrl + _privateKey + "/clear";
+        _get(url);
+    }
     function _get(url: string): string {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);

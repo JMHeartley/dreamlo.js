@@ -43,6 +43,14 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.addScore = addScore;
+    function deleteScores() {
+        if (_privateKey === "") {
+            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+        }
+        const url = _baseUrl + _privateKey + "/clear";
+        _get(url);
+    }
+    DreamLo.deleteScores = deleteScores;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
