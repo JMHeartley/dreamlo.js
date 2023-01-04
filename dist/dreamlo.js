@@ -12,7 +12,7 @@ var DreamLo;
         _privateKey = privateKey;
     }
     DreamLo.initialize = initialize;
-    function getScores(format, sortOrder = SortOrder.ScoreDescending, start = 0, count) {
+    function getScores(format, sortOrder = SortOrder.PointsDescending, start = 0, count) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -31,16 +31,16 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.getScore = getScore;
-    function addScore(name, score, seconds, text) {
+    function addScore(score) {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
-        let url = _baseUrl + _privateKey + "/add/" + name + "/" + score;
-        if (seconds) {
-            url += "/" + seconds;
+        let url = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points;
+        if (score.seconds) {
+            url += "/" + score.seconds;
         }
-        if (text) {
-            url += "/" + text;
+        if (score.text) {
+            url += "/" + score.text;
         }
         _get(url);
     }
@@ -69,8 +69,8 @@ var DreamLo;
     })(ScoreFormat = DreamLo.ScoreFormat || (DreamLo.ScoreFormat = {}));
     let SortOrder;
     (function (SortOrder) {
-        SortOrder["ScoreDescending"] = "";
-        SortOrder["ScoreAscending"] = "-asc";
+        SortOrder["PointsDescending"] = "";
+        SortOrder["PointsAscending"] = "-asc";
         SortOrder["SecondsDescending"] = "-seconds";
         SortOrder["SecondsAscending"] = "-seconds-asc";
         SortOrder["DateDescending"] = "-date";

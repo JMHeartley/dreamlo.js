@@ -1,3 +1,4 @@
+/// <reference path="score.ts" />
 namespace DreamLo {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
@@ -9,7 +10,7 @@ namespace DreamLo {
         _publicKey = publicKey;
         _privateKey = privateKey;
     }
-    export function getScores(format: ScoreFormat, sortOrder: SortOrder = SortOrder.ScoreDescending, start: number = 0, count?: number): string {
+    export function getScores(format: ScoreFormat, sortOrder: SortOrder = SortOrder.PointsDescending, start: number = 0, count?: number): string {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -30,17 +31,17 @@ namespace DreamLo {
 
         return _get(url);
     }
-    export function addScore(name: string, score: number, seconds?: number, text?: string): void {
+    export function addScore(score: Score): void {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
 
-        let url = _baseUrl + _privateKey + "/add/" + name + "/" + score;
-        if (seconds) {
-            url += "/" + seconds;
+        let url = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points;
+        if (score.seconds) {
+            url += "/" + score.seconds;
         }
-        if (text) {
-            url += "/" + text;
+        if (score.text) {
+            url += "/" + score.text;
         }
 
         _get(url);
@@ -68,8 +69,8 @@ namespace DreamLo {
         Quote = "quote"
     }
     export enum SortOrder {
-        ScoreDescending = "",
-        ScoreAscending = "-asc",
+        PointsDescending = "",
+        PointsAscending = "-asc",
         SecondsDescending = "-seconds",
         SecondsAscending = "-seconds-asc",
         DateDescending = "-date",
