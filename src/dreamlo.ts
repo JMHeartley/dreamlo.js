@@ -13,7 +13,7 @@ namespace dreamLo {
         _privateKey = privateKey;
     }
     export function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, start: number = 0, count?: number): string {
-        if (_publicKey === "") {
+        if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
 
@@ -25,7 +25,7 @@ namespace dreamLo {
         return _get(url);
     }
     export function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): string {
-        if (_publicKey === "") {
+        if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
         if (!name) {

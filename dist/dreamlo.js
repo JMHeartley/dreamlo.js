@@ -35,7 +35,7 @@ var dreamLo;
     }
     dreamLo.initialize = initialize;
     function getScores(format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, start = 0, count) {
-        if (_publicKey === "") {
+        if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
         let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + start;
@@ -46,7 +46,7 @@ var dreamLo;
     }
     dreamLo.getScores = getScores;
     function getScore(name, format = dreamLo.ScoreFormat.Json) {
-        if (_publicKey === "") {
+        if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
         if (!name) {
