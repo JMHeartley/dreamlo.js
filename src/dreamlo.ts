@@ -12,14 +12,14 @@ namespace dreamLo {
         _publicKey = publicKey;
         _privateKey = privateKey;
     }
-    export function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, start: number = 0, count?: number): string {
+    export function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): string {
         if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
 
-        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + start;
-        if (count) {
-            url += "/" + count;
+        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+        if (take) {
+            url += "/" + take;
         }
 
         return _get(url);

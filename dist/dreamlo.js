@@ -34,13 +34,13 @@ var dreamLo;
         _privateKey = privateKey;
     }
     dreamLo.initialize = initialize;
-    function getScores(format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, start = 0, count) {
+    function getScores(format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, skip = 0, take) {
         if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
-        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + start;
-        if (count) {
-            url += "/" + count;
+        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+        if (take) {
+            url += "/" + take;
         }
         return _get(url);
     }
