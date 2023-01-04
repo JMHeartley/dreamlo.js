@@ -1,4 +1,6 @@
 /// <reference path="score.ts" />
+/// <reference path="scoreFormat.ts" />
+/// <reference path="sortOrder.ts" />
 namespace dreamLo {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
@@ -74,19 +76,5 @@ namespace dreamLo {
         };
         request.send();
         return data;
-    }
-    export enum ScoreFormat {
-        Json = "json",
-        Xml = "xml",
-        Pipe = "pipe",
-        Quote = "quote"
-    }
-    export enum SortOrder {
-        PointsDescending = "",
-        PointsAscending = "-asc",
-        SecondsDescending = "-seconds",
-        SecondsAscending = "-seconds-asc",
-        DateDescending = "-date",
-        DateAscending = "-date-asc"
     }
 }

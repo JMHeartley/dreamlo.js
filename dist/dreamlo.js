@@ -1,6 +1,28 @@
 "use strict";
 var dreamLo;
 (function (dreamLo) {
+    let ScoreFormat;
+    (function (ScoreFormat) {
+        ScoreFormat["Json"] = "json";
+        ScoreFormat["Xml"] = "xml";
+        ScoreFormat["Pipe"] = "pipe";
+        ScoreFormat["Quote"] = "quote";
+    })(ScoreFormat = dreamLo.ScoreFormat || (dreamLo.ScoreFormat = {}));
+})(dreamLo || (dreamLo = {}));
+var dreamLo;
+(function (dreamLo) {
+    let SortOrder;
+    (function (SortOrder) {
+        SortOrder["PointsDescending"] = "";
+        SortOrder["PointsAscending"] = "-asc";
+        SortOrder["SecondsDescending"] = "-seconds";
+        SortOrder["SecondsAscending"] = "-seconds-asc";
+        SortOrder["DateDescending"] = "-date";
+        SortOrder["DateAscending"] = "-date-asc";
+    })(SortOrder = dreamLo.SortOrder || (dreamLo.SortOrder = {}));
+})(dreamLo || (dreamLo = {}));
+var dreamLo;
+(function (dreamLo) {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
     let _privateKey = "";
@@ -12,7 +34,7 @@ var dreamLo;
         _privateKey = privateKey;
     }
     dreamLo.initialize = initialize;
-    function getScores(format = ScoreFormat.Json, sortOrder = SortOrder.PointsDescending, start = 0, count) {
+    function getScores(format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, start = 0, count) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -23,7 +45,7 @@ var dreamLo;
         return _get(url);
     }
     dreamLo.getScores = getScores;
-    function getScore(format = ScoreFormat.Json, name) {
+    function getScore(format = dreamLo.ScoreFormat.Json, name) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -31,7 +53,7 @@ var dreamLo;
         return _get(url);
     }
     dreamLo.getScore = getScore;
-    function addScore(score, format = ScoreFormat.Json, sortOrder = SortOrder.PointsDescending) {
+    function addScore(score, format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending) {
         var _a;
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
@@ -74,21 +96,5 @@ var dreamLo;
         request.send();
         return data;
     }
-    let ScoreFormat;
-    (function (ScoreFormat) {
-        ScoreFormat["Json"] = "json";
-        ScoreFormat["Xml"] = "xml";
-        ScoreFormat["Pipe"] = "pipe";
-        ScoreFormat["Quote"] = "quote";
-    })(ScoreFormat = dreamLo.ScoreFormat || (dreamLo.ScoreFormat = {}));
-    let SortOrder;
-    (function (SortOrder) {
-        SortOrder["PointsDescending"] = "";
-        SortOrder["PointsAscending"] = "-asc";
-        SortOrder["SecondsDescending"] = "-seconds";
-        SortOrder["SecondsAscending"] = "-seconds-asc";
-        SortOrder["DateDescending"] = "-date";
-        SortOrder["DateAscending"] = "-date-asc";
-    })(SortOrder = dreamLo.SortOrder || (dreamLo.SortOrder = {}));
 })(dreamLo || (dreamLo = {}));
 //# sourceMappingURL=dreamLo.js.map
