@@ -32,13 +32,11 @@ var DreamLo;
     }
     DreamLo.getScore = getScore;
     function addScore(score) {
+        var _a;
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
-        let url = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points;
-        if (score.seconds) {
-            url += "/" + score.seconds;
-        }
+        let url = (_a = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points + "/" + score.seconds) !== null && _a !== void 0 ? _a : -1;
         if (score.text) {
             url += "/" + score.text;
         }
