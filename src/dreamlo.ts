@@ -36,7 +36,7 @@ namespace DreamLo {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
 
-        let url = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points + "/" + score.seconds ?? -1;
+        let url = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points + "/" + score.seconds ?? "";
         if (score.text) {
             url += "/" + score.text;
         }
