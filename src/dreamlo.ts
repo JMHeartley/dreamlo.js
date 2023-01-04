@@ -24,9 +24,12 @@ namespace dreamLo {
 
         return _get(url);
     }
-    export function getScore(format: ScoreFormat = ScoreFormat.Json, name: string): string {
+    export function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): string {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+        }
+        if (!name) {
+            throw new Error("DreamLo getScore name parameter is required.");
         }
 
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;

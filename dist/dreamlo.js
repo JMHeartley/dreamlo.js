@@ -45,9 +45,12 @@ var dreamLo;
         return _get(url);
     }
     dreamLo.getScores = getScores;
-    function getScore(format = dreamLo.ScoreFormat.Json, name) {
+    function getScore(name, format = dreamLo.ScoreFormat.Json) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+        }
+        if (!name) {
+            throw new Error("DreamLo getScore name parameter is required.");
         }
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
         return _get(url);
