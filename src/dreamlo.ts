@@ -31,17 +31,17 @@ namespace DreamLo {
 
         return _get(url);
     }
-    export function addScore(score: Score): void {
+    export function addScore(score: Score, format: ScoreFormat, sortOrder: SortOrder = SortOrder.PointsDescending): string {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
 
-        let url = _baseUrl + _privateKey + "/add/" + score.name + "/" + score.points + "/" + score.seconds ?? "";
+        let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds ?? "";
         if (score.text) {
             url += "/" + score.text;
         }
 
-        _get(url);
+        return _get(url);
     }
     function _get(url: string): string {
         const request = new XMLHttpRequest();
