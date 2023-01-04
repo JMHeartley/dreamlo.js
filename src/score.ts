@@ -1,4 +1,4 @@
-namespace DreamLo {
+namespace dreamLo {
     export interface Score {
         name: string;
         points: number;

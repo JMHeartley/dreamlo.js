@@ -1,6 +1,6 @@
 "use strict";
-var DreamLo;
-(function (DreamLo) {
+var dreamLo;
+(function (dreamLo) {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
     let _privateKey = "";
@@ -11,7 +11,7 @@ var DreamLo;
         _publicKey = publicKey;
         _privateKey = privateKey;
     }
-    DreamLo.initialize = initialize;
+    dreamLo.initialize = initialize;
     function getScores(format = ScoreFormat.Json, sortOrder = SortOrder.PointsDescending, start = 0, count) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
@@ -22,7 +22,7 @@ var DreamLo;
         }
         return _get(url);
     }
-    DreamLo.getScores = getScores;
+    dreamLo.getScores = getScores;
     function getScore(format = ScoreFormat.Json, name) {
         if (_publicKey === "") {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
@@ -30,7 +30,7 @@ var DreamLo;
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
         return _get(url);
     }
-    DreamLo.getScore = getScore;
+    dreamLo.getScore = getScore;
     function addScore(score, format = ScoreFormat.Json, sortOrder = SortOrder.PointsDescending) {
         var _a;
         if (_privateKey === "") {
@@ -42,7 +42,7 @@ var DreamLo;
         }
         return _get(url);
     }
-    DreamLo.addScore = addScore;
+    dreamLo.addScore = addScore;
     function deleteScores() {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
@@ -50,7 +50,7 @@ var DreamLo;
         const url = _baseUrl + _privateKey + "/clear";
         _get(url);
     }
-    DreamLo.deleteScores = deleteScores;
+    dreamLo.deleteScores = deleteScores;
     function deleteScore(name) {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
@@ -58,7 +58,7 @@ var DreamLo;
         const url = _baseUrl + _privateKey + "/delete/" + name;
         _get(url);
     }
-    DreamLo.deleteScore = deleteScore;
+    dreamLo.deleteScore = deleteScore;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
@@ -80,7 +80,7 @@ var DreamLo;
         ScoreFormat["Xml"] = "xml";
         ScoreFormat["Pipe"] = "pipe";
         ScoreFormat["Quote"] = "quote";
-    })(ScoreFormat = DreamLo.ScoreFormat || (DreamLo.ScoreFormat = {}));
+    })(ScoreFormat = dreamLo.ScoreFormat || (dreamLo.ScoreFormat = {}));
     let SortOrder;
     (function (SortOrder) {
         SortOrder["PointsDescending"] = "";
@@ -89,6 +89,6 @@ var DreamLo;
         SortOrder["SecondsAscending"] = "-seconds-asc";
         SortOrder["DateDescending"] = "-date";
         SortOrder["DateAscending"] = "-date-asc";
-    })(SortOrder = DreamLo.SortOrder || (DreamLo.SortOrder = {}));
-})(DreamLo || (DreamLo = {}));
-//# sourceMappingURL=dreamlo.js.map
+    })(SortOrder = dreamLo.SortOrder || (dreamLo.SortOrder = {}));
+})(dreamLo || (dreamLo = {}));
+//# sourceMappingURL=dreamLo.js.map

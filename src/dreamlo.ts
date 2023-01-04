@@ -1,5 +1,5 @@
 /// <reference path="score.ts" />
-namespace DreamLo {
+namespace dreamLo {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
     let _privateKey = "";
