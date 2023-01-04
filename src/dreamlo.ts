@@ -40,6 +40,12 @@ namespace dreamLo {
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
+        if (!score.name) {
+            throw new Error("DreamLo addScore score.name property is required.");
+        }
+        if (!score.points) {
+            throw new Error("DreamLo addScore score.points property is required.");
+        }
 
         let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds ?? "";
         if (score.text) {

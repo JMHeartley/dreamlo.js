@@ -61,6 +61,12 @@ var dreamLo;
         if (_privateKey === "") {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
+        if (!score.name) {
+            throw new Error("DreamLo addScore score.name property is required.");
+        }
+        if (!score.points) {
+            throw new Error("DreamLo addScore score.points property is required.");
+        }
         let url = (_a = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds) !== null && _a !== void 0 ? _a : "";
         if (score.text) {
             url += "/" + score.text;
