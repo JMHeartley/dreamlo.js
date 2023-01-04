@@ -20,7 +20,7 @@ If you can afford it, I recommend upgrading your leaderboard which:
 There are a few ways to start working, all of which globally expose the `dreamLo` variable:
 1. Manually download the compiled file `dreamlo.js` from [dist](/dist) to your appropriate project folder and load using a relative path:
 ```html
-<script src="/path/to/dreamlo.js"></script>
+<script src="/path/to/dreamLo.js"></script>
 ```
 2. Use `<script>` to reference the code through [jsDelivr's CDN](https://www.jsdelivr.com/package/npm/dreamlo-leaderboard-javascript):
 ```html
