@@ -68,7 +68,7 @@ var DreamLo;
                 data = request.responseText;
             }
             else {
-                console.log("DreamLo request returned: " + request.status + " " + request.statusText);
+                throw new Error("DreamLo request returned: " + request.status + " " + request.statusText);
             }
         };
         request.send();
