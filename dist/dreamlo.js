@@ -3,11 +3,13 @@ var DreamLo;
 (function (DreamLo) {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
-    function initialize(publicKey, useHttps = false) {
+    let _privateKey = "";
+    function initialize(publicKey, privateKey, useHttps = false) {
         if (useHttps) {
             _baseUrl = _baseUrl.replace("http://", "https://");
         }
         _publicKey = publicKey;
+        _privateKey = privateKey;
     }
     DreamLo.initialize = initialize;
     function getScores(format, sortOrder = SortOrder.ScoreDescending, start = 0, count) {
@@ -29,6 +31,20 @@ var DreamLo;
         return _get(url);
     }
     DreamLo.getScore = getScore;
+    function addScore(name, score, seconds, text) {
+        if (_privateKey === "") {
+            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+        }
+        let url = _baseUrl + _privateKey + "/add/" + name + "/" + score;
+        if (seconds) {
+            url += "/" + seconds;
+        }
+        if (text) {
+            url += "/" + text;
+        }
+        _get(url);
+    }
+    DreamLo.addScore = addScore;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);

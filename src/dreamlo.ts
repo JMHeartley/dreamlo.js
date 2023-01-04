@@ -1,11 +1,13 @@
 namespace DreamLo {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
-    export function initialize(publicKey: string, useHttps = false): void {
+    let _privateKey = "";
+    export function initialize(publicKey: string, privateKey: string, useHttps = false): void {
         if (useHttps) {
             _baseUrl = _baseUrl.replace("http://", "https://");
         }
         _publicKey = publicKey;
+        _privateKey = privateKey;
     }
     export function getScores(format: ScoreFormat, sortOrder: SortOrder = SortOrder.ScoreDescending, start: number = 0, count?: number): string {
         if (_publicKey === "") {
@@ -27,6 +29,21 @@ namespace DreamLo {
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
 
         return _get(url);
+    }
+    export function addScore(name: string, score: number, seconds?: number, text?: string): void {
+        if (_privateKey === "") {
+            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+        }
+
+        let url = _baseUrl + _privateKey + "/add/" + name + "/" + score;
+        if (seconds) {
+            url += "/" + seconds;
+        }
+        if (text) {
+            url += "/" + text;
+        }
+
+        _get(url);
     }
     function _get(url: string): string {
         const request = new XMLHttpRequest();
