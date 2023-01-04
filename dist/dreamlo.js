@@ -51,6 +51,14 @@ var DreamLo;
         _get(url);
     }
     DreamLo.deleteScores = deleteScores;
+    function deleteScore(name) {
+        if (_privateKey === "") {
+            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+        }
+        const url = _baseUrl + _privateKey + "/delete/" + name;
+        _get(url);
+    }
+    DreamLo.deleteScore = deleteScore;
     function _get(url) {
         const request = new XMLHttpRequest();
         request.open("GET", url, true);
