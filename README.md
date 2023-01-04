@@ -24,7 +24,7 @@ There are a few ways to start working, all of which globally expose the `dreamLo
 ```
 2. Use `<script>` to reference the code through [jsDelivr's CDN](https://www.jsdelivr.com/package/npm/dreamlo-leaderboard-javascript):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/dreamlo-leaderboard-javascript@1.0.0/dist/dreamlo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dreamlo-leaderboard-javascript@1.0.0/dist/dreamLo.min.js"></script>
 ```
 3. Install as a package via npm with the following command:
 ```bash
