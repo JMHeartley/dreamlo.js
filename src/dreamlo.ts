@@ -12,7 +12,7 @@ namespace dreamLo {
         _publicKey = publicKey;
         _privateKey = privateKey;
     }
-    export function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): string {
+    export async function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): Promise<string> {
         if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -22,9 +22,9 @@ namespace dreamLo {
             url += "/" + take;
         }
 
-        return _get(url);
+        return await _get(url);
     }
-    export function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): string {
+    export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): Promise<string> {
         if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -34,9 +34,9 @@ namespace dreamLo {
 
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
 
-        return _get(url);
+        return await _get(url);
     }
-    export function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending): string {
+    export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending): Promise<string> {
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
@@ -52,17 +52,17 @@ namespace dreamLo {
             url += "/" + score.text;
         }
 
-        return _get(url);
+        return await _get(url);
     }
-    export function deleteScores(): void {
+    export async function deleteScores(): Promise<void> {
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
 
         const url = _baseUrl + _privateKey + "/clear";
-        _get(url);
+        await _get(url);
     }
-    export function deleteScore(name: string): void {
+    export async function deleteScore(name: string): Promise<void> {
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
@@ -71,22 +71,19 @@ namespace dreamLo {
         }
 
         const url = _baseUrl + _privateKey + "/delete/" + name;
-        _get(url);
+        await _get(url);
     }
-    function _get(url: string): string {
-        const request = new XMLHttpRequest();
-        request.open("GET", url, true);
-
+    async function _get(url: string): Promise<string> {
         let data = "";
-        request.onload = () => {
-            if (request.status >= 200 && request.status < 400) {
-                data = request.responseText;
-            }
-            else {
-                throw new Error("DreamLo request returned: " + request.status + " " + request.statusText);
-            }
-        };
-        request.send();
+        await fetch(url)
+            .then((response) => response.text())
+            .then((text) => {
+                data = text;
+            })
+            .catch((error) => {
+                throw new Error("DreamLo request returned: " + error);
+            });
+
         return data;
     }
 }

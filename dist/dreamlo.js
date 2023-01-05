@@ -34,7 +34,7 @@ var dreamLo;
         _privateKey = privateKey;
     }
     dreamLo.initialize = initialize;
-    function getScores(format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, skip = 0, take) {
+    async function getScores(format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, skip = 0, take) {
         if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -42,10 +42,10 @@ var dreamLo;
         if (take) {
             url += "/" + take;
         }
-        return _get(url);
+        return await _get(url);
     }
     dreamLo.getScores = getScores;
-    function getScore(name, format = dreamLo.ScoreFormat.Json) {
+    async function getScore(name, format = dreamLo.ScoreFormat.Json) {
         if (!_publicKey) {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
@@ -53,10 +53,10 @@ var dreamLo;
             throw new Error("DreamLo getScore name parameter is required.");
         }
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
-        return _get(url);
+        return await _get(url);
     }
     dreamLo.getScore = getScore;
-    function addScore(score, format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending) {
+    async function addScore(score, format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending) {
         var _a;
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
@@ -71,18 +71,18 @@ var dreamLo;
         if (score.text) {
             url += "/" + score.text;
         }
-        return _get(url);
+        return await _get(url);
     }
     dreamLo.addScore = addScore;
-    function deleteScores() {
+    async function deleteScores() {
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
         const url = _baseUrl + _privateKey + "/clear";
-        _get(url);
+        await _get(url);
     }
     dreamLo.deleteScores = deleteScores;
-    function deleteScore(name) {
+    async function deleteScore(name) {
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
@@ -90,22 +90,19 @@ var dreamLo;
             throw new Error("DreamLo deleteScore name parameter is required.");
         }
         const url = _baseUrl + _privateKey + "/delete/" + name;
-        _get(url);
+        await _get(url);
     }
     dreamLo.deleteScore = deleteScore;
-    function _get(url) {
-        const request = new XMLHttpRequest();
-        request.open("GET", url, true);
+    async function _get(url) {
         let data = "";
-        request.onload = () => {
-            if (request.status >= 200 && request.status < 400) {
-                data = request.responseText;
-            }
-            else {
-                throw new Error("DreamLo request returned: " + request.status + " " + request.statusText);
-            }
-        };
-        request.send();
+        await fetch(url)
+            .then((response) => response.text())
+            .then((text) => {
+            data = text;
+        })
+            .catch((error) => {
+            throw new Error("DreamLo request returned: " + error);
+        });
         return data;
     }
 })(dreamLo || (dreamLo = {}));
