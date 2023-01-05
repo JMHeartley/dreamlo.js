@@ -90,10 +90,10 @@ var dreamLo;
         }
         let url;
         if (format === dreamLo.ScoreFormat.Array) {
-            url = (_a = _baseUrl + _privateKey + "/add-" + dreamLo.ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds) !== null && _a !== void 0 ? _a : "";
+            url = _baseUrl + _privateKey + "/add-" + dreamLo.ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + ((_a = score.seconds) !== null && _a !== void 0 ? _a : "");
         }
         else {
-            url = (_b = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds) !== null && _b !== void 0 ? _b : "";
+            url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + ((_b = score.seconds) !== null && _b !== void 0 ? _b : "");
         }
         if (score.text) {
             url += "/" + score.text;

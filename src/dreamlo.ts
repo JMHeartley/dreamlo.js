@@ -69,10 +69,10 @@ namespace dreamLo {
 
         let url;
         if (format === ScoreFormat.Array) {
-            url = _baseUrl + _privateKey + "/add-" + ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds ?? "";
+            url = _baseUrl + _privateKey + "/add-" + ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
         }
         else {
-            url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + score.seconds ?? "";
+            url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
         }
         if (score.text) {
             url += "/" + score.text;
