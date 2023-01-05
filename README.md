@@ -47,7 +47,7 @@ The `initialize` function is used to set public key, private key, and specify wh
 ```javascript
 dreamLo.getScore(name, format)
 ```
-The `getScore` function is used to get one score as a string. 
+The `getScore` function is used to get one score; returns score in desired format as a `string`.
 + `name`: the name value of the score to retreive
 + `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 
@@ -55,7 +55,7 @@ The `getScore` function is used to get one score as a string.
 ```javascript
 dreamLo.getScores(format, sortOrder, skip, take)
 ```
-The `getScores` function is used to get multiple scores.
+The `getScores` function is used to get multiple scores; returns scores in desired order and format as a `string`.
 
 + `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retreived scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
@@ -68,7 +68,7 @@ The `getScores` function is used to get multiple scores.
 ```javascript
 dreamlo.addScore(score, format, sortOrder)
 ```
-The `addScore` function is used to add a score to the leaderboard.
+The `addScore` function is used to add a score to the leaderboard; returns scores in desired order and format as a `string`.
 
 Adding a `score` where the `score.name` is already present on the leaderboard will overwrite the older score.
 
