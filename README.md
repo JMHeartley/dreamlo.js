@@ -56,7 +56,7 @@ The `initialize` function is used to set public key, private key, and specify wh
 ```javascript
 dreamLo.getScore(name, format)
 ```
-The `getScore` function is used to get one score; returns score in desired format as a `string`.
+The `getScore` function is used to get one score; returns score in desired format as a `string` or `Array`.
 + `name`: the name value of the score to retreive
 + `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 
@@ -64,7 +64,7 @@ The `getScore` function is used to get one score; returns score in desired forma
 ```javascript
 dreamLo.getScores(format, sortOrder, skip, take)
 ```
-The `getScores` function is used to get multiple scores; returns scores in desired order and format as a `string`.
+The `getScores` function is used to get multiple scores; returns scores in desired order and format as a `string` or `Array`.
 
 + `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retreived scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
@@ -77,7 +77,7 @@ The `getScores` function is used to get multiple scores; returns scores in desir
 ```javascript
 dreamlo.addScore(score, format, sortOrder)
 ```
-The `addScore` function is used to add a score to the leaderboard; returns scores in desired order and format as a `string`.
+The `addScore` function is used to add a score to the leaderboard; returns scores in desired order and format as a `string` or `Array`.
 
 Adding a `score` where the `score.name` is already present on the leaderboard will overwrite the older score.
 
@@ -119,8 +119,9 @@ JSON              | `dreamLo.ScoreFormat.Json`
 XML               | `dreamLo.ScoreFormat.Xml`
 Pipe-delimited    | `dreamLo.ScoreFormat.Pipe`
 Quoted with comma | `dreamLo.ScoreFormat.Quote`
+JS Array Object   | `dreamLo.ScoreFormat.Array`
 
-Scores returned in these formats are nested within `dreamlo.leaderboard.entries`.
+Scores returned in these formats are nested within `dreamlo.leaderboard.entries`, with the exception of `Array`.
 
 Scores returned have the same properties as the `score` object, plus an additional `date` property that contains the timestamp the score was added to the leaderboard.
 
