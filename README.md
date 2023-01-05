@@ -103,26 +103,26 @@ The `score` object represents one score on the leaderboard and has the following
 *See [Score](/src/score.ts) for this Typescript interface.*
 
 ### Score Formats
-The format type of scores returned from the leaderboard can be specified using the following values as a `string`:
-Value                          | Format
------------------------------- | ------------
-`dreamLo.ScoreFormat["Json"]`  | JSON
-`dreamLo.ScoreFormat["Xml"]`   | XML
-`dreamLo.ScoreFormat["Pipe"]`  | Pipe-delimited
-`dreamLo.ScoreFormat["Quote"]` | Quoted with comma
+The format type of scores returned from the leaderboard can be specified using the following properties:
+Format            | Property
+------------------| ------------
+JSON              | `dreamLo.ScoreFormat.Json`
+XML               | `dreamLo.ScoreFormat.Xml`
+Pipe-delimited    | `dreamLo.ScoreFormat.Pipe`
+Quoted with comma | `dreamLo.ScoreFormat.Quote`
 
 *See [ScoreFormat](/src/scoreFormat.ts) for this Typescript enum.*
 
 ### Sorting Order
-The sorting order of scores returned form the leaderboard can be specified using the following values as a `string`: 
-Value                             | Order
---------------------------------- | ------------
-`SortOrder["PointsDescending"]`   | Descending by Points
-`SortOrder["PointsAscending"]`    | Ascending by Points
-`SortOrder["SecondsDescending"]`  | Descending by Seconds
-`SortOrder["SecondsAscending"]`   | Ascending by Seconds
-`SortOrder["DateDescending"]`     | Descending by Date
-`SortOrder["DateAscending"]`      | Ascending by Date
+The sorting order of scores returned form the leaderboard can be specified using the following properties: 
+Order                 | Property
+--------------------- | ------------
+Descending by Points  | `dreamLo.SortOrder.PointsDescending`
+Ascending by Points   | `dreamLo.SortOrder.PointsAscending`
+Descending by Seconds | `dreamLo.SortOrder.SecondsDescending`
+Ascending by Seconds  | `dreamLo.SortOrder.SecondsAscending`
+Descending by Date    | `dreamLo.SortOrder.DateDescending`
+Ascending by Date     | `dreamLo.SortOrder.DateAscending`
 
 *See [SortOrder](/src/sortOrder.ts) for this Typescript enum.*
 
