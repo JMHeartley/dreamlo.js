@@ -77,7 +77,7 @@ var dreamLo;
         return result;
     }
     dreamLo.getScore = getScore;
-    async function addScore(score, format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending) {
+    async function addScore(score, format = dreamLo.ScoreFormat.Json, sortOrder = dreamLo.SortOrder.PointsDescending, canOverwrite = false) {
         var _a, _b;
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
@@ -97,6 +97,12 @@ var dreamLo;
         }
         if (score.text) {
             url += "/" + score.text;
+        }
+        if (!canOverwrite) {
+            const existingScore = await getScore(score.name, dreamLo.ScoreFormat.Pipe);
+            if (existingScore) {
+                throw new Error(`Score with name ${score.name} already exists. Set canOverwriteScore to true to overwrite.`);
+            }
         }
         let result = await _get(url);
         if (format === dreamLo.ScoreFormat.Array) {

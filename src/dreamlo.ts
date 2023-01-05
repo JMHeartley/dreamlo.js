@@ -56,7 +56,7 @@ namespace dreamLo {
         }
         return result;
     }
-    export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending): Promise<string> {
+    export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateKey) {
             throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
         }
@@ -76,6 +76,13 @@ namespace dreamLo {
         }
         if (score.text) {
             url += "/" + score.text;
+        }
+
+        if (!canOverwrite) {
+            const existingScore = await getScore(score.name, ScoreFormat.Pipe);
+            if (existingScore) {
+                throw new Error(`Score with name ${score.name} already exists. Set canOverwriteScore to true to overwrite.`);
+            }
         }
 
         let result = await _get(url);
@@ -117,3 +124,4 @@ namespace dreamLo {
         return data;
     }
 }
+//   add demo section to readme

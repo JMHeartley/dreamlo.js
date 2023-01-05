@@ -75,15 +75,14 @@ The `getScores` function is used to get multiple scores; returns scores in desir
 
 ### addScore
 ```javascript
-dreamlo.addScore(score, format, sortOrder)
+dreamlo.addScore(score, format, sortOrder, canOverwrite)
 ```
 The `addScore` function is used to add a score to the leaderboard; returns scores in desired order and format as a `string` or `Array`.
-
-Adding a `score` where the `score.name` is already present on the leaderboard will overwrite the older score.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
 + `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retreived scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
++ `canOverwrite`: when set to `true` adding a `score` where the `score.name` is already present on the leaderboard will overwrite the older score; when set to `false` an error is thrown if overwrite is attempted (default: `false`)
 
 ### deleteScore
 ```javascript
