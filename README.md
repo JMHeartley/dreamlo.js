@@ -49,7 +49,7 @@ dreamLo.getScore(name, format)
 ```
 The `getScore` function is used to get one score as a string. 
 + `name`: the name value of the score to retreive
-+ `format`: the format type of the returned score (default: `"json"`; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 
 ### getScores
 ```javascript
@@ -57,8 +57,8 @@ dreamLo.getScores(format, sortOrder, skip, take)
 ```
 The `getScores` function is used to get multiple scores.
 
-+ `format`: the format type of the returned score (default: `"json"`; see [Formats](#score-formats) for all available types)
-+ `sortOrder`: the sorting order of the retreived scores (default: `PointsDescending`; see [Sorting Order](#sorting-order) for all available orders)
++ `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
++ `sortOrder`: the sorting order of the retreived scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (exclude to retrieve all scores)
 
@@ -73,8 +73,8 @@ The `addScore` function is used to add a score to the leaderboard.
 Adding a `score` where the `score.name` is already present on the leaderboard will overwrite the older score.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
-+ `format`: the format type of the returned score (default: `"json"`; see [Formats](#score-formats) for all available types)
-+ `sortOrder`: the sorting order of the retreived scores (default: `PointsDescending`; see [Sorting Order](#sorting-order) for all available orders)
++ `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
++ `sortOrder`: the sorting order of the retreived scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 
 ### deleteScore
 ```javascript
