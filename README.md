@@ -107,6 +107,7 @@ The `score` object represents one score on the leaderboard and has the following
     text: string;       //optional
 }
 ```
+DreamLo doesn't allow the use of the asterisk character ( * ), all occurrences will be replaced by the underscore charater ( _ ).
 
 *See [Score](/src/score.ts) for this Typescript interface.*
 

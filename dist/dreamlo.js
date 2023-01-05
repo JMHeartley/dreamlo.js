@@ -132,6 +132,7 @@ var dreamLo;
     dreamLo.deleteScore = deleteScore;
     async function _get(url) {
         let data = "";
+        url = url.replace(/\*/gi, "_");
         await fetch(url)
             .then((response) => response.text())
             .then((text) => {

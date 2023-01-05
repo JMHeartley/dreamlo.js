@@ -112,6 +112,8 @@ namespace dreamLo {
     }
     async function _get(url: string): Promise<string> {
         let data = "";
+        // DreamLo Docs: You can not have an asterisk * character in your URL, scores, usernames, etc.
+        url = url.replace(/\*/gi, "_");
         await fetch(url)
             .then((response) => response.text())
             .then((text) => {
@@ -124,4 +126,3 @@ namespace dreamLo {
         return data;
     }
 }
-//   add demo section to readme
