@@ -34,7 +34,8 @@ npm install dreamlo-leaderboard-javascript
 
 
 ## 🤖 Usage
-The methods below, with the except of `initialize()` are all asynchronous, so they can wait for the Http response. Such methods would be used as such:
+The methods below, with the except of `initialize()` are all [Promises](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/promise)
+, so they wait for the Http response. Such methods would be used as such:
 ```javascript
 dreamLo.getScores()
     .then((scores) => {
