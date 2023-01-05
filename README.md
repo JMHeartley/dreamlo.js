@@ -4,6 +4,15 @@
 <p align="center">
   <i>A Javascript library for creating, retrieving, updating, and deleting scores on your DreamLo leaderboard via its web API.</i>
 </p>
+<p align="center">
+  <a href="#-requirements">Requirements</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-usage">Usage</a> •
+  <a href="#-about">About</a> •
+  <a href="#%EF%B8%8F-acknowledgements">Acknowledgements</a> •
+  <a href="#-technologies-used">Technologies Used</a> •
+  <a href="#-license">License</a>
+</p>
 
 
 
