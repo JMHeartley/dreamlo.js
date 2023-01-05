@@ -120,6 +120,10 @@ XML               | `dreamLo.ScoreFormat.Xml`
 Pipe-delimited    | `dreamLo.ScoreFormat.Pipe`
 Quoted with comma | `dreamLo.ScoreFormat.Quote`
 
+Scores returned in these formats are nested within `dreamlo.leaderboard.entries`.
+
+Scores returned have the same properties as the `score` object, plus an additional `date` property that contains the timestamp the score was added to the leaderboard.
+
 *See [ScoreFormat](/src/scoreFormat.ts) for this Typescript enum.*
 
 ### Sorting Order
