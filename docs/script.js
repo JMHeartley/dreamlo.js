@@ -126,6 +126,7 @@ function handleAddScoreFormAndUpdateResponse() {
         })
         .catch((error) => {
             alert("Error adding score: " + error);
+            $("#responseBody-addScore").val('');
         });
 
     alert("Adding score: " + JSON.stringify(score) + "\n format: " + format + ", sortOrder: " + sortOrder + ", canOverwrite: " + canOverwrite);
@@ -144,6 +145,7 @@ function handleGetScoreFormAndUpdateResponse() {
         })
         .catch((error) => {
             alert("Error getting score: " + error);
+            $("#responseBody-getScore").val('');
         });
 
     alert("Getting score for name: " + name + ", format: " + format);
@@ -172,6 +174,7 @@ function handleGetScoresFormAndUpdateResponse() {
         })
         .catch((error) => {
             alert("Error getting scores: " + error);
+            $("#responseBody-getScores").val('');
         });
 
     alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + take);
