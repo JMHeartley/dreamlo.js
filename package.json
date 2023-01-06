@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Interact with the dreamlo leaderboard API using Javascript.",
   "main": "dist/dreamlo.js",
+  "demo": "docs/index.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JMHeartley/dreamlo-leaderboard-javascript.git"

@@ -5,6 +5,7 @@
   <i>A Javascript library for creating, retrieving, updating, and deleting scores on your DreamLo leaderboard via its web API.</i>
 </p>
 <p align="center">
+  <a href="#-demo">Demo</a> •
   <a href="#-requirements">Requirements</a> •
   <a href="#-installation">Installation</a> •
   <a href="#-usage">Usage</a> •
@@ -23,6 +24,13 @@
   <img src="https://img.shields.io/github/repo-size/jmheartley/dreamlo-leaderboard-javascript?color=orange"  alt="GitHub repo size">
   <img src="https://img.shields.io/npm/v/dreamlo-leaderboard-javascript?color=red" alt="NPM version">
 </p>
+
+
+
+## ✨ Demo
+Are you new to DreamLo? Want to test it out without having to commit? 😕
+
+Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo-leaderboard-javascript/) to test requests and retreive leaderboard data 😎
 
 
 
@@ -190,6 +198,9 @@ for [teaching me Typescript](https://learn.microsoft.com/en-us/training/achievem
 ## 👨🏽‍💻 Technologies Used
 + [Typescript](https://www.typescriptlang.org/) - Javascript superset
 + [VSCode](https://code.visualstudio.com/) - code editor
++ [Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) - (used in [demo page](#-demo))
++ [jQuery](https://jquery.com/) - Javascript shorthand library (used in [demo page](#-demo))
++ [Bootstrap](https://getbootstrap.com/) - CSS Framework (used in [demo page](#-demo))
 
 
 

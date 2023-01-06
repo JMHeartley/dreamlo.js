@@ -1,0 +1,16 @@
+.bg-success-light {
+    background-color: #E8F6F0;
+}
+
+.accordion-button:not(.collapsed) {
+    color: black !important;
+    background-color: #E8F6F0 !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: invert(38%) sepia(92%) saturate(392%) hue-rotate(100deg) brightness(91%) contrast(88%);
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(39, 156, 136, 0);
+}
