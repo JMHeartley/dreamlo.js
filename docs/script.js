@@ -104,6 +104,8 @@ function handleInitializeFormAndUpdateResponse() {
 
     $("#publicUrlPreview").val(_baseUrl + _publicKey + '/');
     $("#privateUrlPreview").val(_baseUrl + _privateKey + '/');
+
+    alert("Initializing dreamlo with public key: " + _publicKey + ", private key: " + _privateKey + ", and useHttps: " + _useHttps);
 }
 
 function handleAddScoreFormAndUpdateResponse() {
@@ -130,6 +132,8 @@ function handleAddScoreFormAndUpdateResponse() {
         .catch((error) => {
             alert("Error adding score: " + error);
         });
+
+    alert("Adding score: " + JSON.stringify(score) + "\n format: " + format + ", sortOrder: " + sortOrder + ", canOverwrite: " + canOverwrite);
 }
 
 function handleGetScoreFormAndUpdateResponse() {
@@ -146,6 +150,8 @@ function handleGetScoreFormAndUpdateResponse() {
         .catch((error) => {
             alert("Error getting score: " + error);
         });
+
+    alert("Getting score for name: " + name + ", format: " + format);
 }
 
 function handleGetScoresFormAndUpdateResponse() {
@@ -172,6 +178,8 @@ function handleGetScoresFormAndUpdateResponse() {
         .catch((error) => {
             alert("Error getting scores: " + error);
         });
+
+    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + take);
 }
 
 function handleDeleteScoreFormAndUpdateResponse() {
@@ -184,6 +192,8 @@ function handleDeleteScoreFormAndUpdateResponse() {
         .catch((error) => {
             alert("Error deleting score: " + error);
         });
+
+    alert("Deleting score for name: " + name);
 }
 
 function handleDeleteScoresFormAndUpdateResponse() {
@@ -194,4 +204,6 @@ function handleDeleteScoresFormAndUpdateResponse() {
         .catch((error) => {
             alert("Error deleting scores: " + error);
         });
+
+    alert("Deleting all scores");
 }
