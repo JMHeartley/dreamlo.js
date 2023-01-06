@@ -423,6 +423,49 @@
                 </div>
             </div>
         </div>
+        <div class="accordion" id="deleteScoresAccordion">
+            <div class="accordion-item my-2 border border-success bg-success-light">
+                <h2 class="accordion-header" id="deleteScoresHeading">
+                    <button class="accordion-button collapsed bg-success-light row g-0" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#deleteScoresCollapse" aria-expanded="false"
+                        aria-controls="deleteScoresCollapse">
+                        <div class="col-auto d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success">GET</span>
+                            </div>
+                            <span class="fw-bold mx-2">dreamLo.deleteScores()</span>
+                        </div>
+                        <span class="col-8 offset-1 ps-4 col-lg-auto offset-lg-0 ps-lg-0">Deletes all scores</span>
+                    </button>
+                </h2>
+                <div id="deleteScoresCollapse" class="accordion-collapse collapse border-top border-success"
+                    aria-labelledby="deleteScoresHeading" data-bs-parent="#deleteScoresAccordion">
+                    <div class="accordion-body p-0">
+                        <h5 class="p-3 bg-white">Parameters</h5>
+                        <form class="p-3" id="deleteScoresForm">
+                            <div class="row mb-3">
+                                <span>No parameters</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <h5 class="p-3 bg-white">Response</h5>
+                        <div>
+                            <form class="p-3">
+                                <div class="row mb-3">
+                                    <label for="requestUrl-deleteScores" class="col-sm-2 col-form-label">Request
+                                        URL</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                            id="requestUrl-deleteScores"
+                                            placeholder="Send a request to view the request URL">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="../dist/dreamLo.js"></script>

@@ -47,6 +47,12 @@ function addEventListeners() {
         handleDeleteScoreFormAndUpdateResponse();
         clearForm(this);
     });
+
+    $("#deleteScoresForm").submit(function (event) {
+        event.preventDefault();
+        handleDeleteScoresFormAndUpdateResponse();
+        clearForm(this);
+    });
 }
 
 function resetDefaults() {
@@ -166,4 +172,11 @@ function handleDeleteScoreFormAndUpdateResponse() {
     $('#requestUrl-deleteScore').val(url);
 
     dreamLo.deleteScore(name);
+}
+
+function handleDeleteScoresFormAndUpdateResponse() {
+    let url = _baseUrl + _privateKey + "/clear";
+    $('#requestUrl-deleteScores').val(url);
+
+    dreamLo.deleteScores();
 }
