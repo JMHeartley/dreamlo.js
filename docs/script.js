@@ -126,6 +126,9 @@ function handleAddScoreFormAndUpdateResponse() {
     dreamlo.addScore(score, format, sortOrder, canOverwrite)
         .then((data) => {
             $("#responseBody-addScore").val(data);
+        })
+        .catch((error) => {
+            alert("Error adding score: " + error);
         });
 }
 
@@ -139,6 +142,9 @@ function handleGetScoreFormAndUpdateResponse() {
     dreamlo.getScore(name, format)
         .then((data) => {
             $("#responseBody-getScore").val(data);
+        })
+        .catch((error) => {
+            alert("Error getting score: " + error);
         });
 }
 
@@ -162,6 +168,9 @@ function handleGetScoresFormAndUpdateResponse() {
     dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
             $("#responseBody-getScores").val(data);
+        })
+        .catch((error) => {
+            alert("Error getting scores: " + error);
         });
 }
 
@@ -171,12 +180,18 @@ function handleDeleteScoreFormAndUpdateResponse() {
     let url = _baseUrl + _privateKey + "/delete/" + name;
     $('#requestUrl-deleteScore').val(url);
 
-    dreamlo.deleteScore(name);
+    dreamlo.deleteScore(name)
+        .catch((error) => {
+            alert("Error deleting score: " + error);
+        });
 }
 
 function handleDeleteScoresFormAndUpdateResponse() {
     let url = _baseUrl + _privateKey + "/clear";
     $('#requestUrl-deleteScores').val(url);
 
-    dreamlo.deleteScores();
+    dreamlo.deleteScores()
+        .catch((error) => {
+            alert("Error deleting scores: " + error);
+        });
 }
