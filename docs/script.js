@@ -89,9 +89,14 @@ function handleAddScoreFormAndUpdateResponse() {
         seconds: $("#scoreSecondsInput-addScore").val(),
         text: $("#scoreTextInput-addScore").val()
     };
-    const format = $("#formatInput-addScore").val();
+    let format = $("#formatInput-addScore").val();
     const sortOrder = $("#sortOrderInput-addScore").val();
     const canOverwrite = $("#canOverwriteCheckbox").is(":checked");
+
+    dreamLo.addScore(score, format, sortOrder, canOverwrite)
+        .then((data) => {
+            $("#responseBody-addScore").val(data);
+        });
 
     if (format === 'array') {
         format = 'json';
@@ -101,9 +106,4 @@ function handleAddScoreFormAndUpdateResponse() {
         url += "/" + score.text;
     }
     $('#requestUrl-addScore').val(url)
-
-    dreamLo.addScore(score, format, sortOrder, canOverwrite)
-        .then((data) => {
-            $("#responseBody-addScore").val(data);
-        });
 }
