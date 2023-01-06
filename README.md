@@ -1,8 +1,8 @@
 <h1 align="center">
-    DreamLo Leaderboard (Javascript)
+    dreamlo Leaderboard (Javascript)
 </h1>
 <p align="center">
-  <i>A Javascript library for creating, retrieving, updating, and deleting scores on your DreamLo leaderboard via its web API.</i>
+  <i>A Javascript library for creating, retrieving, updating, and deleting scores on your dreamlo leaderboard via its web API.</i>
 </p>
 <p align="center">
   <a href="#-demo">Demo</a> •
@@ -28,14 +28,14 @@
 
 
 ## ✨ Demo
-Are you new to DreamLo? Want to test it out without having to commit? 😕
+Are you new to dreamlo? Want to test it out without having to commit? 😕
 
 Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo-leaderboard-javascript/) to test requests and retrieve leaderboard data 😎
 
 
 
 ## 🔩 Requirements
-Go to [DreamLo's official website](https://dreamlo.com/) for a unique pair of public and private keys. **Bookmark your leaderboard's page, you won't be given the URL after the first time!**
+Go to [dreamlo's official website](https://dreamlo.com/) for a unique pair of public and private keys. **Bookmark your leaderboard's page, you won't be given the URL after the first time!**
 
 If you can afford it, I recommend upgrading your leaderboard, which:
 + 🔒 enables HTTPS for your board's URL
@@ -44,14 +44,14 @@ If you can afford it, I recommend upgrading your leaderboard, which:
 
 
 ## 🔧 Installation
-There are a few ways to start working, all of which globally expose the `dreamLo` variable:
-1. Manually download the compiled file `dreamLo.js` from [dist](/dist) to your appropriate project folder and load using a relative path:
+There are a few ways to start working, all of which globally expose the `dreamlo` variable:
+1. Manually download the compiled file `dreamlo.js` from [dist](/dist) to your appropriate project folder and load using a relative path:
 ```html
-<script src="/path/to/dreamLo.js"></script>
+<script src="/path/to/dreamlo.js"></script>
 ```
 2. Use `<script>` to reference the code through [jsDelivr's CDN](https://www.jsdelivr.com/package/npm/dreamlo-leaderboard-javascript):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/dreamlo-leaderboard-javascript@1.0.0/dist/dreamLo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dreamlo-leaderboard-javascript@1.0.0/dist/dreamlo.min.js"></script>
 ```
 3. Install as a package via npm with the following command:
 ```bash
@@ -63,7 +63,7 @@ npm install dreamlo-leaderboard-javascript
 ## 🤖 Usage
 The methods below, except `initialize()`, are all [Promises](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/promise), so they wait for the HTTP response. You'd call these methods like:
 ```javascript
-dreamLo.getScores()
+dreamlo.getScores()
     .then((scores) => {
       // do stuff with scores
     });
@@ -71,7 +71,7 @@ dreamLo.getScores()
 
 ### initiailize
 ```javascript
-dreamLo.initialize(publicKey, privateKey, useHttps)
+dreamlo.initialize(publicKey, privateKey, useHttps)
 ```
 The `initialize` function sets the public and private keys and specifies whether the base URL uses HTTP or HTTPS protocol. Call this method before any others.
 + `publicKey`: the public key of your leaderboard
@@ -80,7 +80,7 @@ The `initialize` function sets the public and private keys and specifies whether
 
 ### getScore
 ```javascript
-dreamLo.getScore(name, format)
+dreamlo.getScore(name, format)
 ```
 The `getScore` function sends a request for one score and returns it in the desired format as a `string`.
 + `name`: the name value of the score to request
@@ -88,7 +88,7 @@ The `getScore` function sends a request for one score and returns it in the desi
 
 ### getScores
 ```javascript
-dreamLo.getScores(format, sortOrder, skip, take)
+dreamlo.getScores(format, sortOrder, skip, take)
 ```
 The `getScores` function sends a request for multiple scores and returns them in desired order and format as a `string`.
 
@@ -112,14 +112,14 @@ The `addScore` function sends a request to add a score to the leaderboard and re
 
 ### deleteScore
 ```javascript
-dreamLo.deleteScore(name)
+dreamlo.deleteScore(name)
 ```
 The `deleteScore` function sends a request to to delete one score from the leaderboard.
 + `name`: the name value of the score to delete
 
 ### deleteScores
 ```javascript
-dreamLo.deleteScores()
+dreamlo.deleteScores()
 ```
 The `deleteScores` function sends a request to delete all scores from the leaderboard.
 
@@ -133,7 +133,7 @@ The `score` object represents one score on the leaderboard and has the following
     text: string;       //optional
 }
 ```
-DreamLo doesn't allow the use of the asterisk character ( * ); all occurrences will be replaced by the underscore character ( _ ).
+dreamlo doesn't allow the use of the asterisk character ( * ); all occurrences will be replaced by the underscore character ( _ ).
 
 *See [Score](/src/score.ts) for this Typescript interface.*
 
@@ -141,10 +141,10 @@ DreamLo doesn't allow the use of the asterisk character ( * ); all occurrences w
 The format type of scores returned from the leaderboard can be specified using the following properties:
 Format            | Property
 ------------------| ------------
-JSON              | `dreamLo.ScoreFormat.Json`
-XML               | `dreamLo.ScoreFormat.Xml`
-Pipe-delimited    | `dreamLo.ScoreFormat.Pipe`
-Quoted with comma | `dreamLo.ScoreFormat.Quote`
+JSON              | `dreamlo.ScoreFormat.Json`
+XML               | `dreamlo.ScoreFormat.Xml`
+Pipe-delimited    | `dreamlo.ScoreFormat.Pipe`
+Quoted with comma | `dreamlo.ScoreFormat.Quote`
 
 Scores returned in these formats are nested within `dreamlo.leaderboard.entries`.
 
@@ -156,37 +156,37 @@ Scores returned have the same properties as the `score` object, plus an addition
 The sorting order of scores returned from the leaderboard can be specified using the following properties: 
 Order                 | Property
 --------------------- | ------------
-Descending by Points  | `dreamLo.SortOrder.PointsDescending`
-Ascending by Points   | `dreamLo.SortOrder.PointsAscending`
-Descending by Seconds | `dreamLo.SortOrder.SecondsDescending`
-Ascending by Seconds  | `dreamLo.SortOrder.SecondsAscending`
-Descending by Date    | `dreamLo.SortOrder.DateDescending`
-Ascending by Date     | `dreamLo.SortOrder.DateAscending`
+Descending by Points  | `dreamlo.SortOrder.PointsDescending`
+Ascending by Points   | `dreamlo.SortOrder.PointsAscending`
+Descending by Seconds | `dreamlo.SortOrder.SecondsDescending`
+Ascending by Seconds  | `dreamlo.SortOrder.SecondsAscending`
+Descending by Date    | `dreamlo.SortOrder.DateDescending`
+Ascending by Date     | `dreamlo.SortOrder.DateAscending`
 
 *See [SortOrder](/src/sortOrder.ts) for this Typescript enum.*
 
 
 
 ## 🤔 About
-### What is DreamLo?
-DreamLo is a cloud server for hosting leaderboards for game developers.
-Out of love for Unity, Carmine Guida started hosting DreamLo. He created [an asset](https://assetstore.unity.com/packages/tools/network/dreamlo-com-free-instant-leaderboards-and-promocode-system-3862)
+### What is dreamlo?
+dreamlo is a cloud server for hosting leaderboards for game developers.
+Out of love for Unity, Carmine Guida started hosting dreamlo. He created [an asset](https://assetstore.unity.com/packages/tools/network/dreamlo-com-free-instant-leaderboards-and-promocode-system-3862)
 for the game engine so anyone can effortlessly add a leaderboard to their games.
 
-*Check out [DreamLo's official FAQs page](https://www.dreamlo.com/faq) for more info.*
+*Check out [dreamlo's official FAQs page](https://www.dreamlo.com/faq) for more info.*
 
-### Why use DreamLo with Javascript?
-Previously, I used the DreamLo game asset for [the game my team built for the GTMK 2020 game jam.](https://github.com/JMHeartley/Work-With-Me-Here)
+### Why use dreamlo with Javascript?
+Previously, I used the dreamlo game asset for [the game my team built for the GTMK 2020 game jam.](https://github.com/JMHeartley/Work-With-Me-Here)
 
 Years later, I started sprucing up [an old TicTacToe game I made years ago](https://github.com/JMHeartley/TicTacToe)
-and wanted to add a leaderboard. The first thing that came to mind was DreamLo, but there was a problem, the script for DreamLo that comes with the Unity game asset was written in C#.
+and wanted to add a leaderboard. The first thing that came to mind was dreamlo, but there was a problem, the script for dreamlo that comes with the Unity game asset was written in C#.
 
-I created this script because any game that can make HTTP requests can use DreamLo. Happily, I've extended Carmine's original dream(lo) to Javascript 😊
+I created this script because any game that can make HTTP requests can use dreamlo. Happily, I've extended Carmine's original dream(lo) to Javascript 😊
 
 
 
 ## ❤️ Acknowledgements
-☁️ [Carmine T. Guida](https://carmine.com/) for creating and hosting DreamLo
+☁️ [Carmine T. Guida](https://carmine.com/) for creating and hosting dreamlo
 
 👩🏼‍🏫 [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/build-javascript-applications-typescript/) 
 for [teaching me Typescript](https://learn.microsoft.com/en-us/training/achievements/learn.language.build-javascript-applications-typescript.trophy?username=JMHeartley)

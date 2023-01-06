@@ -1,7 +1,7 @@
 /// <reference path="score.ts" />
 /// <reference path="scoreFormat.ts" />
 /// <reference path="sortOrder.ts" />
-namespace dreamLo {
+namespace dreamlo {
     let _baseUrl = "http://dreamlo.com/lb/";
     let _publicKey = "";
     let _privateKey = "";
@@ -14,7 +14,7 @@ namespace dreamLo {
     }
     export async function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): Promise<string> {
         if (!_publicKey) {
-            throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+            throw new Error("dreamlo public key not set. Call dreamlo.initialize() first.");
         }
 
         let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
@@ -26,10 +26,10 @@ namespace dreamLo {
     }
     export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): Promise<string> {
         if (!_publicKey) {
-            throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
+            throw new Error("dreamlo public key not set. Call dreamlo.initialize() first.");
         }
         if (!name) {
-            throw new Error("DreamLo getScore name parameter is required.");
+            throw new Error("dreamlo getScore name parameter is required.");
         }
 
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
@@ -38,13 +38,13 @@ namespace dreamLo {
     }
     export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateKey) {
-            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+            throw new Error("dreamlo private key not set. Call dreamlo.initialize() first.");
         }
         if (!score.name) {
-            throw new Error("DreamLo addScore score.name property is required.");
+            throw new Error("dreamlo addScore score.name property is required.");
         }
         if (!score.points) {
-            throw new Error("DreamLo addScore score.points property is required.");
+            throw new Error("dreamlo addScore score.points property is required.");
         }
 
         let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
@@ -63,7 +63,7 @@ namespace dreamLo {
     }
     export async function deleteScores(): Promise<void> {
         if (!_privateKey) {
-            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+            throw new Error("dreamlo private key not set. Call dreamlo.initialize() first.");
         }
 
         const url = _baseUrl + _privateKey + "/clear";
@@ -71,10 +71,10 @@ namespace dreamLo {
     }
     export async function deleteScore(name: string): Promise<void> {
         if (!_privateKey) {
-            throw new Error("DreamLo private key not set. Call DreamLo.initialize() first.");
+            throw new Error("dreamlo private key not set. Call dreamlo.initialize() first.");
         }
         if (!name) {
-            throw new Error("DreamLo deleteScore name parameter is required.");
+            throw new Error("dreamlo deleteScore name parameter is required.");
         }
 
         const url = _baseUrl + _privateKey + "/delete/" + name;
@@ -82,7 +82,7 @@ namespace dreamLo {
     }
     async function _get(url: string): Promise<string> {
         let data = "";
-        // DreamLo Docs: You can not have an asterisk * character in your URL, scores, usernames, etc.
+        // dreamlo Docs: You can not have an asterisk * character in your URL, scores, usernames, etc.
         url = url.replace(/\*/gi, "_");
         await fetch(url)
             .then((response) => response.text())
@@ -90,7 +90,7 @@ namespace dreamLo {
                 data = text;
             })
             .catch((error) => {
-                throw new Error("DreamLo request returned: " + error);
+                throw new Error("dreamlo request returned: " + error);
             });
 
         return data;

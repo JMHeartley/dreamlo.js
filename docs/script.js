@@ -66,7 +66,7 @@ function resetDefaults() {
     $("#publicUrlPreview").val(_baseUrl + _publicKey + '/');
     $("#privateUrlPreview").val(_baseUrl + _privateKey + '/');
 
-    dreamLo.initialize(_publicKey, _privateKey, _useHttps);
+    dreamlo.initialize(_publicKey, _privateKey, _useHttps);
 }
 
 function clearForm(htmlElement) {
@@ -123,7 +123,7 @@ function handleAddScoreFormAndUpdateResponse() {
     }
     $('#requestUrl-addScore').val(url);
 
-    dreamLo.addScore(score, format, sortOrder, canOverwrite)
+    dreamlo.addScore(score, format, sortOrder, canOverwrite)
         .then((data) => {
             $("#responseBody-addScore").val(data);
         });
@@ -136,7 +136,7 @@ function handleGetScoreFormAndUpdateResponse() {
     let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
     $('#requestUrl-getScore').val(url);
 
-    dreamLo.getScore(name, format)
+    dreamlo.getScore(name, format)
         .then((data) => {
             $("#responseBody-getScore").val(data);
         });
@@ -159,7 +159,7 @@ function handleGetScoresFormAndUpdateResponse() {
     }
     $('#requestUrl-getScores').val(url);
 
-    dreamLo.getScores(format, sortOrder, skip, take)
+    dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
             $("#responseBody-getScores").val(data);
         });
@@ -171,12 +171,12 @@ function handleDeleteScoreFormAndUpdateResponse() {
     let url = _baseUrl + _privateKey + "/delete/" + name;
     $('#requestUrl-deleteScore').val(url);
 
-    dreamLo.deleteScore(name);
+    dreamlo.deleteScore(name);
 }
 
 function handleDeleteScoresFormAndUpdateResponse() {
     let url = _baseUrl + _privateKey + "/clear";
     $('#requestUrl-deleteScores').val(url);
 
-    dreamLo.deleteScores();
+    dreamlo.deleteScores();
 }

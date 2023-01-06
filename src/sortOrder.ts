@@ -1,4 +1,4 @@
-namespace dreamLo {
+namespace dreamlo {
     export enum SortOrder {
         PointsDescending = "",
         PointsAscending = "-asc",
