@@ -145,9 +145,8 @@ JSON              | `dreamLo.ScoreFormat.Json`
 XML               | `dreamLo.ScoreFormat.Xml`
 Pipe-delimited    | `dreamLo.ScoreFormat.Pipe`
 Quoted with comma | `dreamLo.ScoreFormat.Quote`
-JS Array Object   | `dreamLo.ScoreFormat.Array`
 
-Scores returned in these formats are nested within `dreamlo.leaderboard.entries`, with the except for `Array`.
+Scores returned in these formats are nested within `dreamlo.leaderboard.entries`.
 
 Scores returned have the same properties as the `score` object, plus an additional `date` property that contains the timestamp when the score was updated.
 

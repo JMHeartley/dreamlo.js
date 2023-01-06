@@ -17,22 +17,12 @@ namespace dreamLo {
             throw new Error("DreamLo public key not set. Call DreamLo.initialize() first.");
         }
 
-        let url;
-        if (format === ScoreFormat.Array) {
-            url = _baseUrl + _publicKey + "/" + ScoreFormat.Json + sortOrder + "/" + skip;
-        }
-        else {
-            url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
-        }
+        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
         if (take) {
             url += "/" + take;
         }
 
-        let result = await _get(url);
-        if (format === ScoreFormat.Array) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
-        }
-        return result;
+        return await _get(url);
     }
     export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): Promise<string> {
         if (!_publicKey) {
@@ -42,19 +32,9 @@ namespace dreamLo {
             throw new Error("DreamLo getScore name parameter is required.");
         }
 
-        let url;
-        if (format === ScoreFormat.Array) {
-            url = _baseUrl + _publicKey + "/" + ScoreFormat.Json + "-get/" + name;
-        }
-        else {
-            url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
-        }
+        let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
 
-        let result = await _get(url);
-        if (format === ScoreFormat.Array) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
-        }
-        return result;
+        return await _get(url);
     }
     export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateKey) {
@@ -67,13 +47,7 @@ namespace dreamLo {
             throw new Error("DreamLo addScore score.points property is required.");
         }
 
-        let url;
-        if (format === ScoreFormat.Array) {
-            url = _baseUrl + _privateKey + "/add-" + ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
-        }
-        else {
-            url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
-        }
+        let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
         if (score.text) {
             url += "/" + score.text;
         }
@@ -85,11 +59,7 @@ namespace dreamLo {
             }
         }
 
-        let result = await _get(url);
-        if (format === ScoreFormat.Array) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
-        }
-        return result;
+        return await _get(url);
     }
     export async function deleteScores(): Promise<void> {
         if (!_privateKey) {

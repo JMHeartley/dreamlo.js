@@ -3,7 +3,6 @@ namespace dreamLo {
         Json = "json",
         Xml = "xml",
         Pipe = "pipe",
-        Quote = "quote",
-        Array = "array"
+        Quote = "quote"
     }
 }

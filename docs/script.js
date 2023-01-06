@@ -73,7 +73,7 @@ function clearForm(htmlElement) {
             case 'reset':
                 break;
             default:
-                alert("Unknown input type: " + this.type + "was not reset.")
+                alert("Unknown input type: " + this.type + "was not reset.");
         }
     });
 }
@@ -95,37 +95,31 @@ function handleAddScoreFormAndUpdateResponse() {
         seconds: $("#scoreSecondsInput-addScore").val(),
         text: $("#scoreTextInput-addScore").val()
     };
-    let format = $("#formatInput-addScore").val();
+    const format = $("#formatInput-addScore").val();
     const sortOrder = $("#sortOrderInput-addScore").val();
     const canOverwrite = $("#canOverwriteCheckbox").is(":checked");
+
+    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
+    if (score.text) {
+        url += "/" + score.text;
+    }
+    $('#requestUrl-addScore').val(url);
 
     dreamLo.addScore(score, format, sortOrder, canOverwrite)
         .then((data) => {
             $("#responseBody-addScore").val(data);
         });
-
-    if (format === 'array') {
-        format = 'json';
-    }
-    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
-    if (score.text) {
-        url += "/" + score.text;
-    }
-    $('#requestUrl-addScore').val(url)
 }
 
 function handleGetScoreFormAndUpdateResponse() {
     const name = $("#nameInput-getScore").val();
-    let format = $("#formatInput-getScore").val();
+    const format = $("#formatInput-getScore").val();
+
+    let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+    $('#requestUrl-getScore').val(url);
 
     dreamLo.getScore(name, format)
         .then((data) => {
             $("#responseBody-getScore").val(data);
         });
-
-    if (format === 'array') {
-        format = 'json';
-    }
-    let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
-    $('#requestUrl-getScore').val(url)
 }
