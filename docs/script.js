@@ -1,5 +1,5 @@
 $(function () {
-    resetDefaults();
+    setDefaults();
     addEventListeners();
 });
 
@@ -13,11 +13,6 @@ let _useHttps;
 let _baseUrl;
 
 function addEventListeners() {
-    $("#resetDefaults").click(function () {
-        resetDefaults();
-        // clear all form previews
-    });
-
     $("#initializeForm").submit(function (event) {
         event.preventDefault();
         handleInitializeFormAndUpdateResponse();
@@ -55,7 +50,7 @@ function addEventListeners() {
     });
 }
 
-function resetDefaults() {
+function setDefaults() {
     _publicKey = DEFAULT_PUBLIC_KEY;
     _privateKey = DEFAULT_PRIVATE_KEY;
     _baseUrl = HTTP_BASE_URL;
