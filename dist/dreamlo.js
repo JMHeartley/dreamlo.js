@@ -53,7 +53,8 @@ var dreamlo;
             throw new Error("dreamlo getScore name parameter is required.");
         }
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
-        return _get(url);
+        let result = await _get(url);
+        return _enforceExpectedResult(name, format, result);
     }
     dreamlo.getScore = getScore;
     async function addScore(score, format = dreamlo.ScoreFormat.Json, sortOrder = dreamlo.SortOrder.PointsDescending, canOverwrite = false) {
@@ -111,6 +112,60 @@ var dreamlo;
             throw new Error("dreamlo request returned: " + error);
         });
         return data;
+    }
+    function _enforceExpectedResult(name, format, result) {
+        let newResult = "";
+        switch (format) {
+            case dreamlo.ScoreFormat.Json:
+                for (const score of JSON.parse(result).dreamlo.leaderboard.entry) {
+                    if (score.name === name) {
+                        newResult = JSON.stringify(score);
+                    }
+                }
+                break;
+            case dreamlo.ScoreFormat.Xml:
+                const parser = new DOMParser();
+                let xmlDoc = parser.parseFromString(result, "text/xml");
+                for (const score of xmlDoc.getElementsByTagName("entry")) {
+                    if (score.getElementsByTagName("name")[0].childNodes[0].nodeValue === name) {
+                        newResult = score.outerHTML;
+                    }
+                }
+                break;
+            case dreamlo.ScoreFormat.Pipe:
+                newResult = result;
+                break;
+            case dreamlo.ScoreFormat.Quote:
+                const scoreStringArrays = decodeQuoteWithCommaAsScoreStringArrays(result);
+                for (const score of scoreStringArrays) {
+                    if (score[0] === `"${name}"`) {
+                        newResult = recodeScoreStringArrayAsQuoteWithCommaString(score);
+                    }
+                }
+                break;
+        }
+        return newResult;
+    }
+    function decodeQuoteWithCommaAsScoreStringArrays(data) {
+        let result = [];
+        for (const score of data.split("\n")) {
+            const scoreArray = [];
+            for (const value of score.split(",")) {
+                scoreArray.push(value);
+            }
+            result.push(scoreArray);
+        }
+        return result;
+    }
+    function recodeScoreStringArrayAsQuoteWithCommaString(scoreArray) {
+        let result = "";
+        for (let index = 0; index < scoreArray.length; index++) {
+            result += scoreArray[index];
+            if (index !== scoreArray.length - 1) {
+                result += ",";
+            }
+        }
+        return result;
     }
 })(dreamlo || (dreamlo = {}));
 //# sourceMappingURL=dreamlo.js.map

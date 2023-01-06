@@ -34,7 +34,11 @@ namespace dreamlo {
 
         let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
 
-        return await _get(url);
+        let result = await _get(url);
+        // HACK: this is to get around the fact that the dreamlo API returns all scores 
+        // are returned when using formats JSON, XML, and Quote instead of just the 
+        // score with the matching name, no matter with the score in present or not
+        return _enforceExpectedResult(name, format, result);
     }
     export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateKey) {
@@ -94,5 +98,60 @@ namespace dreamlo {
             });
 
         return data;
+    }
+    function _enforceExpectedResult(name: string, format: ScoreFormat, result: string): string {
+        let newResult = "";
+        switch (format) {
+            case ScoreFormat.Json:
+                for (const score of JSON.parse(result).dreamlo.leaderboard.entry) {
+                    if (score.name === name) {
+                        newResult = JSON.stringify(score);
+                    }
+                }
+                break;
+            case ScoreFormat.Xml:
+                const parser = new DOMParser();
+                let xmlDoc = parser.parseFromString(result, "text/xml");
+                for (const score of xmlDoc.getElementsByTagName("entry")) {
+                    if (score.getElementsByTagName("name")[0].childNodes[0].nodeValue === name) {
+                        newResult = score.outerHTML;
+                    }
+                }
+                break;
+            case ScoreFormat.Pipe:
+                // this format returns a single score as expected
+                newResult = result;
+                break;
+            case ScoreFormat.Quote:
+                const scoreStringArrays = decodeQuoteWithCommaAsScoreStringArrays(result);
+                for (const score of scoreStringArrays) {
+                    if (score[0] === `"${name}"`) {
+                        newResult = recodeScoreStringArrayAsQuoteWithCommaString(score);
+                    }
+                }
+                break;
+        }
+        return newResult;
+    }
+    function decodeQuoteWithCommaAsScoreStringArrays(data: string): string[][] {
+        let result: string[][] = [];
+        for (const score of data.split("\n")) {
+            const scoreArray: string[] = [];
+            for (const value of score.split(",")) {
+                scoreArray.push(value);
+            }
+            result.push(scoreArray);
+        }
+        return result;
+    }
+    function recodeScoreStringArrayAsQuoteWithCommaString(scoreArray: string[]): string {
+        let result = "";
+        for (let index = 0; index < scoreArray.length; index++) {
+            result += scoreArray[index];
+            if (index !== scoreArray.length - 1) {
+                result += ",";
+            }
+        }
+        return result;
     }
 }
