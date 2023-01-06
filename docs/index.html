@@ -21,11 +21,16 @@
         <div class="accordion" id="initializeAccordion">
             <div class="accordion-item my-2 border border-success bg-success-light">
                 <h2 class="accordion-header" id="initializeHeading">
-                    <button class="accordion-button bg-success-light" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button bg-success-light row g-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#initializeCollapse" aria-expanded="true" aria-controls="initializeCollapse">
-                        <span class="badge bg-success">GET</span>
-                        <span class="fw-bold mx-2">initialize(publicKey, privateKey, useHttps)</span>
-                        <span class="fw-normal">Configures your DreamLo URL</span>
+                        <div class="col-auto d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success">GET</span>
+                            </div>
+                            <span class="fw-bold mx-2">initialize(publicKey, privateKey, useHttps)</span>
+                        </div>
+                        <span class="col-8 offset-1 ps-4 col-lg-auto offset-lg-0 ps-lg-0">Configures your DreamLo
+                            URL</span>
                     </button>
                 </h2>
                 <div id="initializeCollapse" class="accordion-collapse collapse show border-top border-success"
@@ -96,11 +101,18 @@
         <div class="accordion" id="addScoreAccordion">
             <div class="accordion-item my-2 border border-success bg-success-light">
                 <h2 class="accordion-header" id="addScoreHeading">
-                    <button class="accordion-button collapsed bg-success-light" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#addScoreCollapse" aria-expanded="false" aria-controls="addScoreCollapse">
-                        <span class="badge bg-success">GET</span>
-                        <span class="fw-bold mx-2">dreamlo.addScore(score, format, sortOrder, canOverwrite)</span>
-                        <span class="fw-normal">Adds one score and gets all scores</span>
+                    <button class="accordion-button collapsed bg-success-light row g-0" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#addScoreCollapse" aria-expanded="false"
+                        aria-controls="addScoreCollapse">
+                        <div class="col-auto d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success">GET</span>
+                            </div>
+                            <span class="fw-bold mx-2">dreamlo.addScore(score, format, sortOrder,
+                                canOverwrite)</span>
+                        </div>
+                        <span class="col-8 offset-1 ps-4 col-lg-auto offset-lg-0 ps-lg-0">Adds one score and gets all
+                            scores</span>
                     </button>
                 </h2>
                 <div id="addScoreCollapse" class="accordion-collapse collapse border-top border-success"
@@ -210,11 +222,16 @@
         <div class="accordion" id="getScoreAccordion">
             <div class="accordion-item my-2 border border-success bg-success-light">
                 <h2 class="accordion-header" id="getScoreHeading">
-                    <button class="accordion-button collapsed bg-success-light" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#getScoreCollapse" aria-expanded="false" aria-controls="getScoreCollapse">
-                        <span class="badge bg-success">GET</span>
-                        <span class="fw-bold mx-2">dreamLo.getScore(name, format)</span>
-                        <span class="fw-normal">Gets one score</span>
+                    <button class="accordion-button collapsed bg-success-light row g-0" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#getScoreCollapse" aria-expanded="false"
+                        aria-controls="getScoreCollapse">
+                        <div class="col-auto d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success">GET</span>
+                            </div>
+                            <span class="fw-bold mx-2">dreamLo.getScore(name, format)</span>
+                        </div>
+                        <span class="col-8 offset-1 ps-4 col-lg-auto offset-lg-0 ps-lg-0">Gets one score</span>
                     </button>
                 </h2>
                 <div id="getScoreCollapse" class="accordion-collapse collapse border-top border-success"
