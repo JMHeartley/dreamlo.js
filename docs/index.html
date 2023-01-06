@@ -208,6 +208,70 @@
                 </div>
             </div>
         </div>
+        <div class="accordion" id="getScoreAccordion">
+            <div class="accordion-item my-2 border border-success bg-success-light">
+                <h2 class="accordion-header" id="getScoreHeading">
+                    <button class="accordion-button collapsed bg-success-light" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#getScoreCollapse" aria-expanded="false" aria-controls="getScoreCollapse">
+                        <span class="badge bg-success">GET</span>
+                        <span class="fw-bold mx-2">dreamLo.getScore(name, format)</span>
+                        <span class="fw-normal">Gets one score</span>
+                    </button>
+                </h2>
+                <div id="getScoreCollapse" class="accordion-collapse collapse border-top border-success"
+                    aria-labelledby="getScoreHeading" data-bs-parent="#getScoreAccordion">
+                    <div class="accordion-body p-0">
+                        <h5 class="p-3 bg-white">Parameters</h5>
+                        <form class="p-3" id="getScoreForm">
+                            <div class="row mb-3">
+                                <label for="nameInput-getScore" class="col-sm-2 col-form-label fw-bold">
+                                    name
+                                    <sup class="text-danger fw-normal ps-2">* required</sup>
+                                </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="nameInput-getScore" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="formatInput-getScore" class="col-sm-2 col-form-label">format</label>
+                                <div class="col-sm-4">
+                                    <select class="form-select" aria-label="Select format type"
+                                        id="formatInput-getScore">
+                                        <option value="json" selected>JSON</option>
+                                        <option value="xml">XML</option>
+                                        <option value="pipe">Pipe-delimited</option>
+                                        <option value="quote">Quoted with comma</option>
+                                        <option value="array">Javascript Array Object</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <h5 class="p-3 bg-white">Response</h5>
+                        <div>
+                            <form class="p-3">
+                                <div class="row mb-3">
+                                    <label for="requestUrl-getScore" class="col-sm-2 col-form-label">Request URL</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                            id="requestUrl-getScore"
+                                            placeholder="Send a request to view the request URL">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="responseBody-getScore" class="col-sm-2 col-form-label">Response
+                                        Body</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="responseBody-getScore" rows="10"
+                                            placeholder="Send a request to view the response body"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="../dist/dreamLo.js"></script>

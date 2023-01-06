@@ -29,6 +29,12 @@ function addEventListeners() {
         handleAddScoreFormAndUpdateResponse();
         clearForm(this);
     });
+
+    $("#getScoreForm").submit(function (event) {
+        event.preventDefault();
+        handleGetScoreFormAndUpdateResponse();
+        clearForm(this);
+    });
 }
 
 function resetDefaults() {
@@ -106,4 +112,20 @@ function handleAddScoreFormAndUpdateResponse() {
         url += "/" + score.text;
     }
     $('#requestUrl-addScore').val(url)
+}
+
+function handleGetScoreFormAndUpdateResponse() {
+    const name = $("#nameInput-getScore").val();
+    let format = $("#formatInput-getScore").val();
+
+    dreamLo.getScore(name, format)
+        .then((data) => {
+            $("#responseBody-getScore").val(data);
+        });
+
+    if (format === 'array') {
+        format = 'json';
+    }
+    let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+    $('#requestUrl-getScore').val(url)
 }
