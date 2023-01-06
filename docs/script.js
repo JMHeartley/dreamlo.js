@@ -35,6 +35,12 @@ function addEventListeners() {
         handleGetScoreFormAndUpdateResponse();
         clearForm(this);
     });
+
+    $("#getScoresForm").submit(function (event) {
+        event.preventDefault();
+        handleGetScoresFormAndUpdateResponse();
+        clearForm(this);
+    });
 }
 
 function resetDefaults() {
@@ -121,5 +127,28 @@ function handleGetScoreFormAndUpdateResponse() {
     dreamLo.getScore(name, format)
         .then((data) => {
             $("#responseBody-getScore").val(data);
+        });
+}
+
+function handleGetScoresFormAndUpdateResponse() {
+    const format = $("#formatInput-getScores").val();
+    const sortOrder = $("#sortOrderInput-getScores").val();
+    let skip = $("#skipInput-getScores").val();
+    const take = $("#takeInput-getScores").val();
+
+    // if not set, give it it's default value
+    if (!skip) {
+        skip = 0;
+    }
+
+    let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+    if (take) {
+        url += "/" + take;
+    }
+    $('#requestUrl-getScores').val(url);
+
+    dreamLo.getScores(format, sortOrder, skip, take)
+        .then((data) => {
+            $("#responseBody-getScores").val(data);
         });
 }

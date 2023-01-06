@@ -287,6 +287,93 @@
                 </div>
             </div>
         </div>
+        <div class="accordion" id="getScoresAccordion">
+            <div class="accordion-item my-2 border border-success bg-success-light">
+                <h2 class="accordion-header" id="getScoresHeading">
+                    <button class="accordion-button collapsed bg-success-light row g-0" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#getScoresCollapse" aria-expanded="false"
+                        aria-controls="getScoresCollapse">
+                        <div class="col-auto d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success">GET</span>
+                            </div>
+                            <span class="fw-bold mx-2">dreamLo.getScores(format, sortOrder, skip, take)</span>
+                        </div>
+                        <span class="col-8 offset-1 ps-4 col-lg-auto offset-lg-0 ps-lg-0">Gets multiple scores</span>
+                    </button>
+                </h2>
+                <div id="getScoresCollapse" class="accordion-collapse collapse border-top border-success"
+                    aria-labelledby="getScoresHeading" data-bs-parent="#getScoresAccordion">
+                    <div class="accordion-body p-0">
+                        <h5 class="p-3 bg-white">Parameters</h5>
+                        <form class="p-3" id="getScoresForm">
+                            <div class="row mb-3">
+                                <label for="formatInput-getScores" class="col-sm-2 col-form-label">format</label>
+                                <div class="col-sm-4">
+                                    <select class="form-select" aria-label="Select format type"
+                                        id="formatInput-getScores">
+                                        <option value="json" selected>JSON</option>
+                                        <option value="xml">XML</option>
+                                        <option value="pipe">Pipe-delimited</option>
+                                        <option value="quote">Quoted with comma</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="sortOrderInput-getScores" class="col-sm-2 col-form-label">sortOrder</label>
+                                <div class="col-sm-4">
+                                    <select class="form-select" aria-label="Select sorting order"
+                                        id="sortOrderInput-getScores">
+                                        <option value="" selected>Descending by Points</option>
+                                        <option value="-asc">Ascending by Points</option>
+                                        <option value="-seconds">Descending by Seconds</option>
+                                        <option value="-seconds-asc">Ascending by Seconds</option>
+                                        <option value="-date">Descending by Date</option>
+                                        <option value="-date-asc">Ascending by Date</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="skipInput-getScores" class="col-sm-2 col-form-label">skip</label>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control" id="skipInput-getScores" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="takeInput-getScores" class="col-sm-2 col-form-label">take</label>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control" id="takeInput-getScores">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <h5 class="p-3 bg-white">Response</h5>
+                        <div>
+                            <form class="p-3">
+                                <div class="row mb-3">
+                                    <label for="requestUrl-getScores" class="col-sm-2 col-form-label">Request
+                                        URL</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                            id="requestUrl-getScores"
+                                            placeholder="Send a request to view the request URL">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="responseBody-getScores" class="col-sm-2 col-form-label">Response
+                                        Body</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="responseBody-getScores" rows="10"
+                                            placeholder="Send a request to view the response body"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="../dist/dreamLo.js"></script>
