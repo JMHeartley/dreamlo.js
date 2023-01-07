@@ -107,12 +107,12 @@ namespace dreamlo {
         return data;
     }
     function _enforceExpectedResult(name: string, format: ScoreFormat, result: string): string {
-        let newResult = "";
+        let expectedResult = "";
         switch (format) {
             case ScoreFormat.Json:
                 for (const score of JSON.parse(result).dreamlo.leaderboard.entry) {
                     if (score.name === name) {
-                        newResult = JSON.stringify(score);
+                        expectedResult = JSON.stringify(score);
                     }
                 }
                 break;
@@ -121,44 +121,40 @@ namespace dreamlo {
                 let xmlDoc = parser.parseFromString(result, "text/xml");
                 for (const score of xmlDoc.getElementsByTagName("entry")) {
                     if (score.getElementsByTagName("name")[0].childNodes[0].nodeValue === name) {
-                        newResult = score.outerHTML;
+                        expectedResult = score.outerHTML;
                     }
                 }
                 break;
             case ScoreFormat.Pipe:
                 // this format returns a single score as expected
-                newResult = result;
+                expectedResult = result;
                 break;
             case ScoreFormat.Quote:
-                const scoreStringArrays = decodeQuoteWithCommaAsScoreStringArrays(result);
-                for (const score of scoreStringArrays) {
-                    if (score[0] === `"${name}"`) {
-                        newResult = recodeScoreStringArrayAsQuoteWithCommaString(score);
+                const scoreArrays = _decodeQuoteWithCommaStringAsScoreArrays(result);
+                for (const scoreArray of scoreArrays) {
+                    if (scoreArray[0] === `"${name}"`) {
+                        expectedResult = _recodeScoreArrayAsQuoteWithCommaString(scoreArray);
                     }
                 }
                 break;
         }
-        return newResult;
+        return expectedResult;
     }
-    function decodeQuoteWithCommaAsScoreStringArrays(data: string): string[][] {
-        let result: string[][] = [];
-        for (const score of data.split("\n")) {
-            const scoreArray: string[] = [];
-            for (const value of score.split(",")) {
-                scoreArray.push(value);
-            }
-            result.push(scoreArray);
-        }
-        return result;
+    function _decodeQuoteWithCommaStringAsScoreArrays(quoteWithCommaString: string): string[][] {
+        let scoreArrays: string[][] = [];
+        quoteWithCommaString.split("\n").forEach((score) => {
+            scoreArrays.push(score.split(","));
+        });
+        return scoreArrays;
     }
-    function recodeScoreStringArrayAsQuoteWithCommaString(scoreArray: string[]): string {
-        let result = "";
+    function _recodeScoreArrayAsQuoteWithCommaString(scoreArray: string[]): string {
+        let quoteWithCommaString = "";
         for (let index = 0; index < scoreArray.length; index++) {
-            result += scoreArray[index];
+            quoteWithCommaString += scoreArray[index];
             if (index !== scoreArray.length - 1) {
-                result += ",";
+                quoteWithCommaString += ",";
             }
         }
-        return result;
+        return quoteWithCommaString;
     }
 }
