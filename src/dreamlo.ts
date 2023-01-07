@@ -89,7 +89,14 @@ namespace dreamlo {
         // dreamlo Docs: You can not have an asterisk * character in your URL, scores, usernames, etc.
         url = url.replace(/\*/gi, "_");
         await fetch(url)
-            .then((response) => response.text())
+            .then((response) => {
+                if (!response.ok) {
+                    const error = response.status + " " + response.statusText;
+                    return Promise.reject(error);
+                }
+
+                return response.text()
+            })
             .then((text) => {
                 data = text;
             })

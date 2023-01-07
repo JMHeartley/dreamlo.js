@@ -104,7 +104,13 @@ var dreamlo;
         let data = "";
         url = url.replace(/\*/gi, "_");
         await fetch(url)
-            .then((response) => response.text())
+            .then((response) => {
+            if (!response.ok) {
+                const error = response.status + " " + response.statusText;
+                return Promise.reject(error);
+            }
+            return response.text();
+        })
             .then((text) => {
             data = text;
         })
