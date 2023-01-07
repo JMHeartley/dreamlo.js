@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dreamlo Demo</title>
+    <title>dreamlo UI</title>
     <link rel="shortcut icon" type="image/png" href="favicon.svg" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -17,7 +17,50 @@
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="bg-light">
+    <div class="bg-white p-4 mb-4">
+        <div class="container">
+            <div class="d-flex">
+                <h1>
+                    <strong>dream</strong><span class="text-purple">lo UI</span>
+                </h1>
+                <a href="https://github.com/JMHeartley/dreamlo-leaderboard-javascript" target="_blank"
+                    class="text-decoration-none ms-auto">
+                    <img src="github logo.svg" alt="GitHub Logo">
+                </a>
+            </div>
+            <p class="lead mb-5">
+                Interact with your dreamlo leaderboard without having any of the implementation logic in place.
+            </p>
+            <div class="ms-0 ms-lg-5">
+                <h5>Some things to <strong class="text-purple">note:</strong></h5>
+                <ul>
+                    <li>This Swagger UI-inspired page was made for demoing the <a
+                            href="https://github.com/JMHeartley/dreamlo-leaderboard-javascript"
+                            target="_blank">dream-leaderboard-javascript</a>
+                        library but can be used to interact with any dreamlo leaderboard.
+                    </li>
+                    <li>A detailed explanation for each method can be found
+                        <a href="https://github.com/JMHeartley/dreamlo-leaderboard-javascript#-usage"
+                            target="_blank">here</a>; I won't
+                        rewrite it here because that would violate
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Don't Repeat Yourself">the DRY
+                            principle. 😜</span>
+                    </li>
+                    <li>All requests are GET requests, as per
+                        <a href="https://www.dreamlo.com/developer" target="_blank">dreamlo's official developer
+                            page</a>.
+                    </li>
+                    <li>Keys to
+                        <a href="https://dreamlo.com/lb/ElOCRpEtnUKf3PeJf4ByXw11TQgPvqhUS-YWKF7m8ZwA" target="_blank">a
+                            free leaderboard</a>
+                        were provided and plugged into <code>initialize()</code> when this page loaded.
+                    </li>
+                    <li>You can set new keys using <code>initialize()</code> to interact with another leaderboard.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="accordion" id="initializeAccordion">
             <div class="accordion-item my-2 border border-success bg-success-light">
