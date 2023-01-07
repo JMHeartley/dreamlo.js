@@ -66,6 +66,9 @@ The methods below, except `initialize()`, are all [Promises](https://developer.m
 dreamlo.getScores()
     .then((scores) => {
       // do stuff with scores
+    })
+    .catch((error) => {
+      // do something with error
     });
 ```
 
