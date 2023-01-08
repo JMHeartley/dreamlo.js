@@ -20,7 +20,7 @@
   </a>
   <img src="https://img.shields.io/github/last-commit/jmheartley/dreamlo-leaderboard-javascript?color=green" alt="GitHub last commit">
   <img src="https://img.shields.io/github/contributors/jmheartley/dreamlo-leaderboard-javascript?color=yellowgreen" alt="GitHub contributors">
-  <img src="https://img.shields.io/tokei/lines/github/jmheartley/dreamlo-leaderboard-javascript?color=yellow" alt="Lines of code">
+  <img src="https://img.shields.io/badge/total%20lines-1.1k-yellow" alt="Lines of code">
   <img src="https://img.shields.io/github/repo-size/jmheartley/dreamlo-leaderboard-javascript?color=orange"  alt="GitHub repo size">
   <img src="https://img.shields.io/npm/v/dreamlo-leaderboard-javascript?color=red" alt="NPM version">
 </p>
