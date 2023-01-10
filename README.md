@@ -5,6 +5,7 @@
   <i>A Javascript library for creating, retrieving, updating, and deleting scores on your dreamlo leaderboard via its web API.</i>
 </p>
 <p align="center">
+  <a href="#-examples">Examples</a> •
   <a href="#-demo">Demo</a> •
   <a href="#-requirements">Requirements</a> •
   <a href="#-installation">Installation</a> •
@@ -24,6 +25,12 @@
   <img src="https://img.shields.io/github/repo-size/jmheartley/dreamlo-leaderboard-javascript?color=orange"  alt="GitHub repo size">
   <img src="https://img.shields.io/npm/v/dreamlo-leaderboard-javascript?color=red" alt="NPM version">
 </p>
+
+
+
+## 🧙 Examples
+Using this for your game? Send me a message with a link and I'll add it to the examples listed below:
++ [TicTacToe](https://github.com/JMHeartley/TicTacToe)
 
 
 
