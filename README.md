@@ -118,7 +118,7 @@ The `addScore` function sends a request to add a score to the leaderboard and re
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
 + `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
-+ `canOverwrite`: when set to `true`, adding a `score` where the `score.name` is already present on the leaderboard will overwrite the older score; when set to `false`, an error is thrown if an overwrite is attempted (default: `false`)
++ `canOverwrite`: when set to `true`, adding a `score` where the `score.name` is already present on the leaderboard will persist the score with higher `score.points`; when set to `false`, an error is thrown if an overwrite is attempted (default: `false`)
 
 ### deleteScore
 ```javascript
