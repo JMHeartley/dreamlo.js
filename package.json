@@ -1,12 +1,12 @@
 {
-  "name": "dreamlo-leaderboard-javascript",
+  "name": "dreamlo.js",
   "version": "1.0.0",
   "description": "Interact with the dreamlo leaderboard API using Javascript.",
   "main": "dist/dreamlo.js",
   "demo": "docs/index.html",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JMHeartley/dreamlo-leaderboard-javascript.git"
+    "url": "git+https://github.com/JMHeartley/dreamlo.js.git"
   },
   "keywords": [
     "dreamlo",
@@ -16,9 +16,9 @@
   "author": "JMHeartley",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JMHeartley/dreamlo-leaderboard-javascript.git"
+    "url": "https://github.com/JMHeartley/dreamlo.js.git"
   },
-  "homepage": "https://github.com/JMHeartley/dreamlo-leaderboard-javascript.git#readme",
+  "homepage": "https://github.com/JMHeartley/dreamlo.js.git#readme",
   "devDependencies": {
     "typescript": "^4.9.4"
   }

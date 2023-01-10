@@ -17,13 +17,13 @@
 </p>
 <p align="center">
   <a href="/LICENSE">
-    <img src="https://img.shields.io/github/license/jmheartley/dreamlo-leaderboard-javascript?color=brightgreen" alt="GitHub License" >
+    <img src="https://img.shields.io/github/license/jmheartley/dreamlo.js?color=brightgreen" alt="GitHub License" >
   </a>
-  <img src="https://img.shields.io/github/last-commit/jmheartley/dreamlo-leaderboard-javascript?color=green" alt="GitHub last commit">
-  <img src="https://img.shields.io/github/contributors/jmheartley/dreamlo-leaderboard-javascript?color=yellowgreen" alt="GitHub contributors">
+  <img src="https://img.shields.io/github/last-commit/jmheartley/dreamlo.js?color=green" alt="GitHub last commit">
+  <img src="https://img.shields.io/github/contributors/jmheartley/dreamlo.js?color=yellowgreen" alt="GitHub contributors">
   <img src="https://img.shields.io/badge/total%20lines-1.1k-yellow" alt="Lines of code">
-  <img src="https://img.shields.io/github/repo-size/jmheartley/dreamlo-leaderboard-javascript?color=orange"  alt="GitHub repo size">
-  <img src="https://img.shields.io/npm/v/dreamlo-leaderboard-javascript?color=red" alt="NPM version">
+  <img src="https://img.shields.io/github/repo-size/jmheartley/dreamlo.js?color=orange"  alt="GitHub repo size">
+  <img src="https://img.shields.io/npm/v/dreamlo.js?color=red" alt="NPM version">
 </p>
 
 
@@ -37,7 +37,7 @@ Using this for your game? Send me a message with a link and I'll add it to the e
 ## ✨ Demo
 Are you new to dreamlo? Want to test it out without having to commit? 😕
 
-Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo-leaderboard-javascript/) to test requests and retrieve leaderboard data 😎
+Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo.js/) to test requests and retrieve leaderboard data 😎
 
 
 
@@ -56,13 +56,13 @@ There are a few ways to start working, all of which globally expose the `dreamlo
 ```html
 <script src="/path/to/dreamlo.js"></script>
 ```
-2. Use `<script>` to reference the code through [jsDelivr's CDN](https://www.jsdelivr.com/package/npm/dreamlo-leaderboard-javascript):
+2. Use `<script>` to reference the code through [jsDelivr's CDN](https://www.jsdelivr.com/package/npm/dreamlo.js):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/dreamlo-leaderboard-javascript@1.0.0/dist/dreamlo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dreamlo.js@1.0.0/dist/dreamlo.min.js"></script>
 ```
 3. Install as a package via npm with the following command:
 ```bash
-npm install dreamlo-leaderboard-javascript
+npm install dreamlo.js
 ```
 
 
