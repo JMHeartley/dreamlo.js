@@ -1,12 +1,12 @@
 <h1 align="center">
-    dreamlo Leaderboard (Javascript)
+    dreamlo.js
 </h1>
 <p align="center">
   <i>A Javascript library for creating, retrieving, updating, and deleting scores on your dreamlo leaderboard via its web API.</i>
 </p>
 <p align="center">
   <a href="#-examples">Examples</a> •
-  <a href="#-demo">Demo</a> •
+  <a href="#%EF%B8%8F-demo">Demo</a> •
   <a href="#-requirements">Requirements</a> •
   <a href="#-installation">Installation</a> •
   <a href="#-usage">Usage</a> •
@@ -28,13 +28,13 @@
 
 
 
-## 🧙 Examples
-Using this for your game? Send me a message with a link and I'll add it to the examples listed below:
+## 👨‍🔧 Examples
+Using dreamlo.js for your game's leaderboard? Send me a message with a link and I'll add it to the examples listed below:
 + [TicTacToe](https://github.com/JMHeartley/TicTacToe)
 
 
 
-## ✨ Demo
+## ⚙️ Demo
 Are you new to dreamlo? Want to test it out without having to commit? 😕
 
 Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo.js/) to test requests and retrieve leaderboard data 😎
