@@ -114,7 +114,7 @@ function handleAddScoreFormAndUpdateResponse() {
     const sortOrder = $("#sortOrderInput-addScore").val();
     const canOverwrite = $("#canOverwriteCheckbox").is(":checked");
 
-    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
+    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
     if (score.text) {
         url += "/" + score.text;
     }

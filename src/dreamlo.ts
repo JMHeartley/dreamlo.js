@@ -51,7 +51,7 @@ namespace dreamlo {
             throw new Error("dreamlo addScore score.points property is required.");
         }
 
-        let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? "");
+        let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
         if (score.text) {
             url += "/" + score.text;
         }
