@@ -1,5 +1,5 @@
 <h1 align="center">
-    dreamlo Leaderboard (Javascript)
+    dreamlo.js
 </h1>
 <p align="center">
   <i>A Javascript library for creating, retrieving, updating, and deleting scores on your dreamlo leaderboard via its web API.</i>
