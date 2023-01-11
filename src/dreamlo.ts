@@ -12,19 +12,29 @@ namespace dreamlo {
         _publicKey = publicKey;
         _privateKey = privateKey;
     }
-    export async function getScores(format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): Promise<string> {
+    export async function getScores(format: ScoreFormat = ScoreFormat.Object, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): Promise<string> {
         if (!_publicKey) {
             throw new Error("dreamlo public key not set. Call dreamlo.initialize() first.");
         }
 
-        let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+        let url;
+        if (format === ScoreFormat.Object) {
+            url = _baseUrl + _publicKey + "/" + ScoreFormat.Json + sortOrder + "/" + skip;
+        }
+        else {
+            url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+        }
         if (take) {
             url += "/" + take;
         }
 
-        return await _get(url);
+        let result = await _get(url);
+        if (format === ScoreFormat.Object) {
+            result = JSON.parse(result).dreamlo.leaderboard.entry;
+        }
+        return result;
     }
-    export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Json): Promise<string> {
+    export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Object): Promise<string> {
         if (!_publicKey) {
             throw new Error("dreamlo public key not set. Call dreamlo.initialize() first.");
         }
@@ -32,15 +42,24 @@ namespace dreamlo {
             throw new Error("dreamlo getScore name parameter is required.");
         }
 
-        let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+        let url;
+        if (format === ScoreFormat.Object) {
+            url = _baseUrl + _publicKey + "/" + ScoreFormat.Json + "-get/" + name;
+        }
+        else {
+            url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+        }
 
         let result = await _get(url);
+        if (format === ScoreFormat.Object) {
+            result = JSON.parse(result).dreamlo.leaderboard.entry;
+        }
         // HACK: this is to get around the fact that the dreamlo API returns all scores 
         // are returned when using formats JSON, XML, and Quote instead of just the 
         // score with the matching name, no matter with the score in present or not
         return _enforceExpectedResult(name, format, result);
     }
-    export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Json, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
+    export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Object, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateKey) {
             throw new Error("dreamlo private key not set. Call dreamlo.initialize() first.");
         }
@@ -51,7 +70,13 @@ namespace dreamlo {
             throw new Error("dreamlo addScore score.points property is required.");
         }
 
-        let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+        let url;
+        if (format === ScoreFormat.Object) {
+            url = _baseUrl + _privateKey + "/add-" + ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+        }
+        else {
+            url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+        }
         if (score.text) {
             url += "/" + score.text;
         }
@@ -63,7 +88,11 @@ namespace dreamlo {
             }
         }
 
-        return await _get(url);
+        let result = await _get(url);
+        if (format === ScoreFormat.Object) {
+            result = JSON.parse(result).dreamlo.leaderboard.entry;
+        }
+        return result;
     }
     export async function deleteScores(): Promise<void> {
         if (!_privateKey) {
@@ -106,9 +135,16 @@ namespace dreamlo {
 
         return data;
     }
-    function _enforceExpectedResult(name: string, format: ScoreFormat, result: string): string {
+    function _enforceExpectedResult(name: string, format: ScoreFormat, result: any): string {
         let expectedResult = "";
         switch (format) {
+            case ScoreFormat.Object:
+                for (const score of result) {
+                    if (score.name === name) {
+                        expectedResult = score;
+                    }
+                }
+                break;
             case ScoreFormat.Json:
                 for (const score of JSON.parse(result).dreamlo.leaderboard.entry) {
                     if (score.name === name) {

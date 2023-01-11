@@ -110,15 +110,11 @@ function handleAddScoreFormAndUpdateResponse() {
         seconds: $("#scoreSecondsInput-addScore").val(),
         text: $("#scoreTextInput-addScore").val()
     };
-    const format = $("#formatInput-addScore").val();
+    let format = $("#formatInput-addScore").val();
     const sortOrder = $("#sortOrderInput-addScore").val();
     const canOverwrite = $("#canOverwriteCheckbox").is(":checked");
 
-    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
-    if (score.text) {
-        url += "/" + score.text;
-    }
-    $('#requestUrl-addScore').val(url);
+    alert("Adding score: " + JSON.stringify(score) + "\n format: " + format + ", sortOrder: " + sortOrder + ", canOverwrite: " + canOverwrite);
 
     dreamlo.addScore(score, format, sortOrder, canOverwrite)
         .then((data) => {
@@ -129,15 +125,21 @@ function handleAddScoreFormAndUpdateResponse() {
             $("#responseBody-addScore").val('');
         });
 
-    alert("Adding score: " + JSON.stringify(score) + "\n format: " + format + ", sortOrder: " + sortOrder + ", canOverwrite: " + canOverwrite);
+    if (format === 'object') {
+        format = 'json';
+    }
+    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+    if (score.text) {
+        url += "/" + score.text;
+    }
+    $('#requestUrl-addScore').val(url);
 }
 
 function handleGetScoreFormAndUpdateResponse() {
     const name = $("#nameInput-getScore").val();
-    const format = $("#formatInput-getScore").val();
+    let format = $("#formatInput-getScore").val();
 
-    let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
-    $('#requestUrl-getScore').val(url);
+    alert("Getting score for name: " + name + ", format: " + format);
 
     dreamlo.getScore(name, format)
         .then((data) => {
@@ -148,11 +150,15 @@ function handleGetScoreFormAndUpdateResponse() {
             $("#responseBody-getScore").val('');
         });
 
-    alert("Getting score for name: " + name + ", format: " + format);
+    if (format === 'object') {
+        format = 'json';
+    }
+    let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+    $('#requestUrl-getScore').val(url);
 }
 
 function handleGetScoresFormAndUpdateResponse() {
-    const format = $("#formatInput-getScores").val();
+    let format = $("#formatInput-getScores").val();
     const sortOrder = $("#sortOrderInput-getScores").val();
     let skip = $("#skipInput-getScores").val();
     const take = $("#takeInput-getScores").val();
@@ -162,11 +168,7 @@ function handleGetScoresFormAndUpdateResponse() {
         skip = 0;
     }
 
-    let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
-    if (take) {
-        url += "/" + take;
-    }
-    $('#requestUrl-getScores').val(url);
+    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + take);
 
     dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
@@ -177,31 +179,38 @@ function handleGetScoresFormAndUpdateResponse() {
             $("#responseBody-getScores").val('');
         });
 
-    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + take);
+    if (format === 'object') {
+        format = 'json';
+    }
+    let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+    if (take) {
+        url += "/" + take;
+    }
+    $('#requestUrl-getScores').val(url);
 }
 
 function handleDeleteScoreFormAndUpdateResponse() {
     const name = $("#nameInput-deleteScore").val();
 
-    let url = _baseUrl + _privateKey + "/delete/" + name;
-    $('#requestUrl-deleteScore').val(url);
+    alert("Deleting score for name: " + name);
 
     dreamlo.deleteScore(name)
         .catch((error) => {
             alert("Error deleting score: " + error);
         });
 
-    alert("Deleting score for name: " + name);
+    let url = _baseUrl + _privateKey + "/delete/" + name;
+    $('#requestUrl-deleteScore').val(url);
 }
 
 function handleDeleteScoresFormAndUpdateResponse() {
-    let url = _baseUrl + _privateKey + "/clear";
-    $('#requestUrl-deleteScores').val(url);
+    alert("Deleting all scores");
 
     dreamlo.deleteScores()
         .catch((error) => {
             alert("Error deleting scores: " + error);
         });
 
-    alert("Deleting all scores");
+    let url = _baseUrl + _privateKey + "/clear";
+    $('#requestUrl-deleteScores').val(url);
 }

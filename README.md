@@ -94,7 +94,7 @@ dreamlo.getScore(name, format)
 ```
 The `getScore` function sends a request for one score and returns it in the desired format as a `string`.
 + `name`: the name value of the score to request
-+ `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned score (default format: `Object`; see [Formats](#score-formats) for all available types)
 
 ### getScores
 ```javascript
@@ -102,7 +102,7 @@ dreamlo.getScores(format, sortOrder, skip, take)
 ```
 The `getScores` function sends a request for multiple scores and returns them in desired order and format as a `string`.
 
-+ `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned score (default format: `Object[]`; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (exclude to retrieve all scores)
@@ -116,7 +116,7 @@ dreamlo.addScore(score, format, sortOrder, canOverwrite)
 The `addScore` function sends a request to add a score to the leaderboard and returns all scores in desired order and format as a `string`.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
-+ `format`: the format type of the returned score (default format: JSON; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned score (default format: `Object[]`; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `canOverwrite`: when set to `true`, adding a `score` where the `score.name` is already present on the leaderboard will persist the score with higher `score.points`; when set to `false`, an error is thrown if an overwrite is attempted (default: `false`)
 
@@ -151,12 +151,13 @@ dreamlo doesn't allow the use of the asterisk character ( * ); all occurrences w
 The format type of scores returned from the leaderboard can be specified using the following properties:
 Format            | Property
 ------------------| ------------
+Javascript Object | `dreamLo.ScoreFormat.Object`
 JSON              | `dreamlo.ScoreFormat.Json`
 XML               | `dreamlo.ScoreFormat.Xml`
 Pipe-delimited    | `dreamlo.ScoreFormat.Pipe`
 Quoted with comma | `dreamlo.ScoreFormat.Quote`
 
-Scores returned in these formats are nested within `dreamlo.leaderboard.entries`.
+`Object` returns an array of scores for `addScore` and `getScores`, and a single score object for `getScore`. The remainder of the formats return scores nested within `dreamlo.leaderboard.entries`.
 
 Scores returned have the same properties as the `score` object, plus an additional `date` property that contains the timestamp when the score was updated.
 
