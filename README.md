@@ -68,7 +68,8 @@ npm install dreamlo.js
 
 
 ## 🤖 Usage
-The methods below, except `initialize()`, are all [Promises](https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/promise), so they wait for the HTTP response. You'd call these methods like:
+The methods below, except `initialize()`, are all [Promises](https://javascript.info/promise-basics), so they can wait for the HTTP response. You'd call these methods using [Promise chains](https://javascript.info/promise-chaining):
+
 ```javascript
 dreamlo.getScores()
     .then((scores) => {
@@ -77,6 +78,17 @@ dreamlo.getScores()
     .catch((error) => {
       // do something with error
     });
+```
+
+or [async/await](https://javascript.info/async-await):
+
+```javascript
+try {
+  var scores = await dreamlo.getScores();
+  // do stuff with scores
+} catch (error) {
+  // do something with error
+}
 ```
 
 ### initiailize
