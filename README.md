@@ -207,9 +207,10 @@ for [teaching me Typescript](https://learn.microsoft.com/en-us/training/achievem
 ## 👨🏽‍💻 Technologies Used
 + [Typescript](https://www.typescriptlang.org/) - Javascript superset
 + [VSCode](https://code.visualstudio.com/) - code editor
-+ [Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) - (used in [demo page](#-demo))
-+ [jQuery](https://jquery.com/) - Javascript shorthand library (used in [demo page](#-demo))
-+ [Bootstrap](https://getbootstrap.com/) - CSS Framework (used in [demo page](#-demo))
++ [HTML](https://www.w3schools.com/html/) - webpage markup language (used in [demo page](#%EF%B8%8F-demo))
++ [Bootstrap](https://getbootstrap.com/) - CSS Library (used in [demo page](#%EF%B8%8F-demo))
++ [Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) - webpage interactivity language (used in [demo page](#%EF%B8%8F-demo))
++ [jQuery](https://jquery.com/) - Javascript shorthand library (used in [demo page](#%EF%B8%8F-demo))
 
 
 
