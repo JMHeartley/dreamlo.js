@@ -30,7 +30,7 @@
 
 ## 👨‍🔧 Examples
 Using dreamlo.js for your game's leaderboard? Send me a message with a link and I'll add it to the examples listed below:
-+ [TicTacToe](https://github.com/JMHeartley/TicTacToe)
++ [Tic-Tac-Toe](https://github.com/JMHeartley/Tic-Tac-Toe)
 
 
 
