@@ -5,8 +5,8 @@ $(function () {
 
 const HTTP_BASE_URL = 'http://dreamlo.com/lb/';
 const HTTPS_BASE_URL = 'https://dreamlo.com/lb/';
-const DEFAULT_PUBLIC_KEY = '63b5a2e18f40bb1070f72cb4';
-const DEFAULT_PRIVATE_KEY = 'ElOCRpEtnUKf3PeJf4ByXw11TQgPvqhUS-YWKF7m8ZwA';
+const DEFAULT_PUBLIC_KEY = '5fa8af5feb371a09c4c51d17';
+const DEFAULT_PRIVATE_KEY = 'cgpr101Ep0yMn0IZPhMAqwVghoK20BG06c_rPh-i1Npg';
 let _publicKey;
 let _privateKey;
 let _useHttps;
@@ -48,13 +48,20 @@ function addEventListeners() {
         handleDeleteScoresFormAndUpdateResponse();
         clearForm(this);
     });
+
+    $("#useHttpsCheckbox").change(function () {
+        if (window.location.protocol === "https:" && !this.checked) {
+            openMixedContentWarning();
+            this.checked = true;
+        }
+    });
 }
 
 function setDefaults() {
     _publicKey = DEFAULT_PUBLIC_KEY;
     _privateKey = DEFAULT_PRIVATE_KEY;
     _baseUrl = HTTP_BASE_URL;
-    _useHttps = false;
+    _useHttps = true;
     $("#publicKeyInput").val(_publicKey);
     $("#privateKeyInput").val(_privateKey);
     $("#useHttpsCheckbox").prop('checked', _useHttps);
@@ -213,4 +220,11 @@ function handleDeleteScoresFormAndUpdateResponse() {
 
     let url = _baseUrl + _privateKey + "/clear";
     $('#requestUrl-deleteScores').val(url);
+}
+
+function openMixedContentWarning() {
+    var warningModal = new bootstrap.Modal(document.getElementById('mixedContentWarningModal'), {
+        keyboard: false
+    });
+    warningModal.show();
 }

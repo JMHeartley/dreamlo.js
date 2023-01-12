@@ -56,8 +56,8 @@
                             page</a>.
                     </li>
                     <li>Keys to
-                        <a href="https://dreamlo.com/lb/ElOCRpEtnUKf3PeJf4ByXw11TQgPvqhUS-YWKF7m8ZwA" target="_blank">a
-                            free leaderboard</a>
+                        <a href="https://dreamlo.com/lb/ElOCRpEtnUKf3PeJf4ByXw11TQgPvqhUS-YWKF7m8ZwA" target="_blank">an
+                            upgraded leaderboard</a>
                         were provided and plugged into <code>initialize()</code> when this page loaded.
                     </li>
                     <li>You can set new keys using <code>initialize()</code> to interact with another leaderboard.</li>
@@ -512,6 +512,44 @@
                             </form>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="mixedContentWarningModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="mixedContentWarningModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Mixed Context Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Since this page is hosted on HTTPS,
+                    <strong>
+                        requests to a leaderboard using HTTP are marked as Mixed
+                        Content and will be blocked by the browser.
+                    </strong>
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Yes, I agree. It sucks.">😒</span>
+                    <br>
+                    <br>
+                    To test HTTP leaderboards using dreamlo UI,
+                    <a href="https://github.com/JMHeartley/dreamlo.js" target="_blank">download the repository from
+                        GitHub</a> and run this page locally on your computer.
+                    <br>
+                    <br>
+                    <small class="fst-italic">
+                        Warning that appears in the console:
+                    </small>
+                    <br>
+                    <code>
+                        ❌ Mixed Content: The page at 'https://this.address' was loaded over HTTPS, but requested an insecure 
+                        resource 'http://dreamlo.com/lb/your-leaderboard-url'. This request has been blocked; 
+                        the content must be served over HTTPS.
+                    </code>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
                 </div>
             </div>
         </div>
