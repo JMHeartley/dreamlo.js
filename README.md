@@ -119,7 +119,7 @@ The `getScores` function sends a request for multiple scores and returns them in
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (exclude to retrieve all scores)
 
-*All parameters are optional or have default values; calling with no parameters will return all scores, sorted by points in descending order, as a JSON string.*
+*All parameters are optional or have default values; calling with no parameters will return all scores, sorted by points in descending order, as an array of Objects.*
 
 ### addScore
 ```javascript
