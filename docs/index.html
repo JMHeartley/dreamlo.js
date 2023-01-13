@@ -55,12 +55,12 @@
                         <a href="https://www.dreamlo.com/developer" target="_blank">dreamlo's official developer
                             page</a>.
                     </li>
-                    <li>Keys to
+                    <li>Codes to
                         <a href="https://dreamlo.com/lb/ElOCRpEtnUKf3PeJf4ByXw11TQgPvqhUS-YWKF7m8ZwA" target="_blank">an
                             upgraded leaderboard</a>
                         were provided and plugged into <code>initialize()</code> when this page loaded.
                     </li>
-                    <li>You can set new keys using <code>initialize()</code> to interact with another leaderboard.</li>
+                    <li>You can set new codes using <code>initialize()</code> to interact with another leaderboard.</li>
                 </ul>
             </div>
         </div>
@@ -75,7 +75,7 @@
                             <div class="d-flex align-items-center">
                                 <span class="badge bg-success">GET</span>
                             </div>
-                            <span class="fw-bold mx-2">initialize(publicKey, privateKey, useHttps)</span>
+                            <span class="fw-bold mx-2">initialize(publicCode, privateCode, useHttps)</span>
                         </div>
                         <span class="col-8 offset-1 ps-4 col-lg-auto offset-lg-0 ps-lg-0">Configures your dreamlo
                             URL</span>
@@ -87,23 +87,23 @@
                         <h5 class="p-3 bg-white">Parameters</h5>
                         <form class="p-3" id="initializeForm" data-ajax="false">
                             <div class="row mb-3">
-                                <label for="publicKeyInput" class="col-sm-2 col-form-label fw-bold">
-                                    publicKey
+                                <label for="publicCodeInput" class="col-sm-2 col-form-label fw-bold">
+                                    publicCode
                                     <sup class="text-danger fw-normal text-nowrap">* required</sup>
                                 </label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="publicKeyInput" placeholder="publicKey"
-                                        required>
+                                    <input type="text" class="form-control" id="publicCodeInput"
+                                        placeholder="publicCode" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="privateKeyInput" class="col-sm-2 col-form-label fw-bold">
-                                    privateKey
+                                <label for="privateCodeInput" class="col-sm-2 col-form-label fw-bold">
+                                    privateCode
                                     <sup class="text-danger fw-normal text-nowrap">* required</sup>
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="privateKeyInput"
-                                        placeholder="privateKey" required>
+                                    <input type="text" class="form-control" id="privateCodeInput"
+                                        placeholder="privateCode" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -126,7 +126,7 @@
                                         Preview</label>
                                     <div class="col-sm-10">
                                         <input type="text" readonly class="form-control-plaintext" id="publicUrlPreview"
-                                            placeholder="Set publicKey to preview the public URL">
+                                            placeholder="Set publicCode to preview the public URL">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -135,7 +135,7 @@
                                     <div class="col-sm-10">
                                         <input type="text" readonly class="form-control-plaintext"
                                             id="privateUrlPreview"
-                                            placeholder="Set privateKey to preview the private URL">
+                                            placeholder="Set privateCode to preview the private URL">
                                     </div>
                                 </div>
                             </form>

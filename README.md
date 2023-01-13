@@ -42,7 +42,7 @@ Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo.js
 
 
 ## 🔩 Requirements
-Go to [dreamlo's official website](https://dreamlo.com/) for a unique pair of public and private keys. **Bookmark your leaderboard's page, you won't be given the URL after the first time!**
+Go to [dreamlo's official website](https://dreamlo.com/) for a unique pair of public and private codes. **Bookmark your leaderboard's page, you won't be given the URL after the first time!**
 
 If you can afford it, I recommend upgrading your leaderboard, which:
 + 🔒 enables HTTPS for your board's URL
@@ -93,11 +93,11 @@ try {
 
 ### initiailize
 ```javascript
-dreamlo.initialize(publicKey, privateKey, useHttps)
+dreamlo.initialize(publicCode, privateCode, useHttps)
 ```
-The `initialize` function sets the public and private keys and specifies whether the base URL uses HTTP or HTTPS protocol. Call this method before any others.
-+ `publicKey`: the public key of your leaderboard
-+ `privateKey`: the private key of your leaderboard
+The `initialize` function sets the public and private codes and specifies whether the base URL uses HTTP or HTTPS protocol. Call this method before any others.
++ `publicCode`: the public code of your leaderboard
++ `privateCode`: the private code of your leaderboard
 + `useHttps`: toggles HTTP or HTTPS on the base URL (default: `false`)
 
 ### getScore

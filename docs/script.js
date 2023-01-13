@@ -5,10 +5,10 @@ $(function () {
 
 const HTTP_BASE_URL = 'http://dreamlo.com/lb/';
 const HTTPS_BASE_URL = 'https://dreamlo.com/lb/';
-const DEFAULT_PUBLIC_KEY = '5fa8af5feb371a09c4c51d17';
-const DEFAULT_PRIVATE_KEY = 'cgpr101Ep0yMn0IZPhMAqwVghoK20BG06c_rPh-i1Npg';
-let _publicKey;
-let _privateKey;
+const DEFAULT_PUBLIC_CODE = '5fa8af5feb371a09c4c51d17';
+const DEFAULT_PRIVATE_CODE = 'cgpr101Ep0yMn0IZPhMAqwVghoK20BG06c_rPh-i1Npg';
+let _publicCode;
+let _privateCode;
 let _useHttps;
 let _baseUrl;
 
@@ -58,17 +58,17 @@ function addEventListeners() {
 }
 
 function setDefaults() {
-    _publicKey = DEFAULT_PUBLIC_KEY;
-    _privateKey = DEFAULT_PRIVATE_KEY;
+    _publicCode = DEFAULT_PUBLIC_CODE;
+    _privateCode = DEFAULT_PRIVATE_CODE;
     _baseUrl = HTTP_BASE_URL;
     _useHttps = true;
-    $("#publicKeyInput").val(_publicKey);
-    $("#privateKeyInput").val(_privateKey);
+    $("#publicCodeInput").val(_publicCode);
+    $("#privateCodeInput").val(_privateCode);
     $("#useHttpsCheckbox").prop('checked', _useHttps);
-    $("#publicUrlPreview").val(_baseUrl + _publicKey + '/');
-    $("#privateUrlPreview").val(_baseUrl + _privateKey + '/');
+    $("#publicUrlPreview").val(_baseUrl + _publicCode + '/');
+    $("#privateUrlPreview").val(_baseUrl + _privateCode + '/');
 
-    dreamlo.initialize(_publicKey, _privateKey, _useHttps);
+    dreamlo.initialize(_publicCode, _privateCode, _useHttps);
 }
 
 function clearForm(htmlElement) {
@@ -99,15 +99,15 @@ function clearForm(htmlElement) {
 }
 
 function handleInitializeFormAndUpdateResponse() {
-    _publicKey = $("#publicKeyInput").val();
-    _privateKey = $("#privateKeyInput").val();
+    _publicCode = $("#publicCodeInput").val();
+    _privateCode = $("#privateCodeInput").val();
     _useHttps = $("#useHttpsCheckbox").is(":checked");
     _baseUrl = _useHttps ? HTTPS_BASE_URL : HTTP_BASE_URL;
 
-    $("#publicUrlPreview").val(_baseUrl + _publicKey + '/');
-    $("#privateUrlPreview").val(_baseUrl + _privateKey + '/');
+    $("#publicUrlPreview").val(_baseUrl + _publicCode + '/');
+    $("#privateUrlPreview").val(_baseUrl + _privateCode + '/');
 
-    alert("Initializing dreamlo with public key: " + _publicKey + ", private key: " + _privateKey + ", and useHttps: " + _useHttps);
+    alert("Initializing dreamlo with public code: " + _publicCode + ", private code: " + _privateCode + ", and useHttps: " + _useHttps);
 }
 
 function handleAddScoreFormAndUpdateResponse() {
@@ -135,7 +135,7 @@ function handleAddScoreFormAndUpdateResponse() {
     if (format === 'object') {
         format = 'json';
     }
-    let url = _baseUrl + _privateKey + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+    let url = _baseUrl + _privateCode + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
     if (score.text) {
         url += "/" + score.text;
     }
@@ -160,7 +160,7 @@ function handleGetScoreFormAndUpdateResponse() {
     if (format === 'object') {
         format = 'json';
     }
-    let url = _baseUrl + _publicKey + "/" + format + "-get/" + name;
+    let url = _baseUrl + _publicCode + "/" + format + "-get/" + name;
     $('#requestUrl-getScore').val(url);
 }
 
@@ -189,7 +189,7 @@ function handleGetScoresFormAndUpdateResponse() {
     if (format === 'object') {
         format = 'json';
     }
-    let url = _baseUrl + _publicKey + "/" + format + sortOrder + "/" + skip;
+    let url = _baseUrl + _publicCode + "/" + format + sortOrder + "/" + skip;
     if (take) {
         url += "/" + take;
     }
@@ -206,7 +206,7 @@ function handleDeleteScoreFormAndUpdateResponse() {
             alert("Error deleting score: " + error);
         });
 
-    let url = _baseUrl + _privateKey + "/delete/" + name;
+    let url = _baseUrl + _privateCode + "/delete/" + name;
     $('#requestUrl-deleteScore').val(url);
 }
 
@@ -218,7 +218,7 @@ function handleDeleteScoresFormAndUpdateResponse() {
             alert("Error deleting scores: " + error);
         });
 
-    let url = _baseUrl + _privateKey + "/clear";
+    let url = _baseUrl + _privateCode + "/clear";
     $('#requestUrl-deleteScores').val(url);
 }
 
