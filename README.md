@@ -58,7 +58,7 @@ There are a few ways to start working, all of which globally expose the `dreamlo
 ```
 2. Use `<script>` to reference the code through [jsDelivr's CDN](https://www.jsdelivr.com/package/npm/dreamlo.js):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/dreamlo.js@1.0.1/dist/dreamlo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dreamlo.js@1.1.0/dist/dreamlo.min.js"></script>
 ```
 3. Install the [package via npm](https://www.npmjs.com/package/dreamlo.js) with the following command:
 ```bash
