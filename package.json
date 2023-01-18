@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/JMHeartley/dreamlo.js.git"
   },
-  "homepage": "https://github.com/JMHeartley/dreamlo.js.git#readme",
+  "homepage": "https://jmheartley.github.io/dreamlo.js/",
   "devDependencies": {
     "typescript": "^4.9.4"
   }
