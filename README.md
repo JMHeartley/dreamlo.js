@@ -68,7 +68,9 @@ npm install dreamlo.js
 
 
 ## 🤖 Usage
-The methods below, except `initialize()`, are all [Promises](https://javascript.info/promise-basics), so they can wait for the HTTP response. You'd call these methods using [Promise chains](https://javascript.info/promise-chaining):
+The methods below, except `initialize()`, are all [Promises](https://javascript.info/promise-basics), so they can wait for the HTTP response. Failed HTTP requests will throw an `Error` containing the [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
+
+You can use these methods with [Promise chains](https://javascript.info/promise-chaining):
 
 ```javascript
 dreamlo.getScores()
