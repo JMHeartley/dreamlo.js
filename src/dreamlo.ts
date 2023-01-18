@@ -30,9 +30,9 @@ namespace dreamlo {
 
         let result = await _get(url);
         if (format === ScoreFormat.Object) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
+            result = JSON.parse(result).dreamlo.leaderboard;
         }
-        return result;
+        return _enforceExpectedResultForMultipleScoreRetrieval(format, result);
     }
     export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Object): Promise<string> {
         if (!_publicCode) {
@@ -54,10 +54,7 @@ namespace dreamlo {
         if (format === ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard.entry;
         }
-        // HACK: this is to get around the fact that the dreamlo API returns all scores 
-        // are returned when using formats JSON, XML, and Quote instead of just the 
-        // score with the matching name, no matter with the score in present or not
-        return _enforceExpectedResult(name, format, result);
+        return _enforceExpectedResultForSingleScoreRetrieval(name, format, result);
     }
     export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Object, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateCode) {
@@ -89,9 +86,9 @@ namespace dreamlo {
 
         let result = await _get(url);
         if (format === ScoreFormat.Object) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
+            result = JSON.parse(result).dreamlo.leaderboard;
         }
-        return result;
+        return _enforceExpectedResultForMultipleScoreRetrieval(format, result);
     }
     export async function deleteScores(): Promise<void> {
         if (!_privateCode) {
@@ -134,7 +131,47 @@ namespace dreamlo {
 
         return data;
     }
-    function _enforceExpectedResult(name: string, format: ScoreFormat, result: any): string {
+    //HACK: this is to get around the fact that dreamlo API returns an object
+    // when a single score is returned and null when no scores are returned, 
+    // enforce an array is always returned when using Object or JSON formats
+    function _enforceExpectedResultForMultipleScoreRetrieval(format: ScoreFormat, result: any): any {
+        let expectedResult: any;
+        switch (format) {
+            case ScoreFormat.Object:
+                if (!result) {
+                    expectedResult = [];
+                }
+                else if (!Array.isArray(result.entry)) {
+                    expectedResult = [result];
+                }
+                else {
+                    expectedResult = result;
+                }
+                break;
+            case ScoreFormat.Json:
+                const jsonResult = JSON.parse(result);
+                if (!jsonResult.dreamlo.leaderboard) {
+                    jsonResult.dreamlo.leaderboard = [];
+                }
+                else if (!Array.isArray(jsonResult.dreamlo.leaderboard.entry)) {
+                    jsonResult.dreamlo.leaderboard.entry = [jsonResult.dreamlo.leaderboard.entry];
+                }
+                expectedResult = JSON.stringify(jsonResult);
+                break;
+            // the following formats don't have an equivalent to an array of scores
+            // and will return a single score or an empty string
+            case ScoreFormat.Xml:
+            case ScoreFormat.Pipe:
+            case ScoreFormat.Quote:
+                expectedResult = result;
+                break;
+        }
+        return expectedResult;
+    }
+    // HACK: this is to get around the fact that the dreamlo API returns all scores 
+    // are returned when using JSON, XML, or Quote formats instead of just the 
+    // score with the matching name, no matter with the score in present or not
+    function _enforceExpectedResultForSingleScoreRetrieval(name: string, format: ScoreFormat, result: any): string {
         let expectedResult = "";
         switch (format) {
             case ScoreFormat.Object:

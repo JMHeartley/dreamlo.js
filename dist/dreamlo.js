@@ -51,9 +51,9 @@ var dreamlo;
         }
         let result = await _get(url);
         if (format === dreamlo.ScoreFormat.Object) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
+            result = JSON.parse(result).dreamlo.leaderboard;
         }
-        return result;
+        return _enforceExpectedResultForMultipleScoreRetrieval(format, result);
     }
     dreamlo.getScores = getScores;
     async function getScore(name, format = dreamlo.ScoreFormat.Object) {
@@ -74,7 +74,7 @@ var dreamlo;
         if (format === dreamlo.ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard.entry;
         }
-        return _enforceExpectedResult(name, format, result);
+        return _enforceExpectedResultForSingleScoreRetrieval(name, format, result);
     }
     dreamlo.getScore = getScore;
     async function addScore(score, format = dreamlo.ScoreFormat.Object, sortOrder = dreamlo.SortOrder.PointsDescending, canOverwrite = false) {
@@ -106,9 +106,9 @@ var dreamlo;
         }
         let result = await _get(url);
         if (format === dreamlo.ScoreFormat.Object) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
+            result = JSON.parse(result).dreamlo.leaderboard;
         }
-        return result;
+        return _enforceExpectedResultForMultipleScoreRetrieval(format, result);
     }
     dreamlo.addScore = addScore;
     async function deleteScores() {
@@ -149,7 +149,39 @@ var dreamlo;
         });
         return data;
     }
-    function _enforceExpectedResult(name, format, result) {
+    function _enforceExpectedResultForMultipleScoreRetrieval(format, result) {
+        let expectedResult;
+        switch (format) {
+            case dreamlo.ScoreFormat.Object:
+                if (!result) {
+                    expectedResult = [];
+                }
+                else if (!Array.isArray(result.entry)) {
+                    expectedResult = [result];
+                }
+                else {
+                    expectedResult = result;
+                }
+                break;
+            case dreamlo.ScoreFormat.Json:
+                const jsonResult = JSON.parse(result);
+                if (!jsonResult.dreamlo.leaderboard) {
+                    jsonResult.dreamlo.leaderboard = [];
+                }
+                else if (!Array.isArray(jsonResult.dreamlo.leaderboard.entry)) {
+                    jsonResult.dreamlo.leaderboard.entry = [jsonResult.dreamlo.leaderboard.entry];
+                }
+                expectedResult = JSON.stringify(jsonResult);
+                break;
+            case dreamlo.ScoreFormat.Xml:
+            case dreamlo.ScoreFormat.Pipe:
+            case dreamlo.ScoreFormat.Quote:
+                expectedResult = result;
+                break;
+        }
+        return expectedResult;
+    }
+    function _enforceExpectedResultForSingleScoreRetrieval(name, format, result) {
         let expectedResult = "";
         switch (format) {
             case dreamlo.ScoreFormat.Object:
