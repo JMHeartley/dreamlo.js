@@ -14,7 +14,7 @@ namespace dreamlo {
     }
     export async function getScores(format: ScoreFormat = ScoreFormat.Object, sortOrder: SortOrder = SortOrder.PointsDescending, skip: number = 0, take?: number): Promise<string> {
         if (!_publicCode) {
-            throw new Error("dreamlo public code not set. Call dreamlo.initialize() first.");
+            throw new Error("publicCode is not set; call dreamlo.initialize() first.");
         }
 
         let url;
@@ -36,10 +36,10 @@ namespace dreamlo {
     }
     export async function getScore(name: string, format: ScoreFormat = ScoreFormat.Object): Promise<string> {
         if (!_publicCode) {
-            throw new Error("dreamlo public code not set. Call dreamlo.initialize() first.");
+            throw new Error("publicCode is not set; call dreamlo.initialize() first.");
         }
         if (!name) {
-            throw new Error("dreamlo getScore name parameter is required.");
+            throw new Error("name parameter is required.");
         }
 
         let url;
@@ -61,13 +61,19 @@ namespace dreamlo {
     }
     export async function addScore(score: Score, format: ScoreFormat = ScoreFormat.Object, sortOrder: SortOrder = SortOrder.PointsDescending, canOverwrite: boolean = false): Promise<string> {
         if (!_privateCode) {
-            throw new Error("dreamlo private code not set. Call dreamlo.initialize() first.");
+            throw new Error("privateCode not set; call dreamlo.initialize() first.");
         }
         if (!score.name) {
-            throw new Error("dreamlo addScore score.name property is required.");
+            throw new Error("score.name property is required.");
         }
         if (!score.points) {
-            throw new Error("dreamlo addScore score.points property is required.");
+            throw new Error("score.points property is required.");
+        }
+        if (!canOverwrite) {
+            const existingScore = await getScore(score.name, ScoreFormat.Pipe);
+            if (existingScore) {
+                throw new Error(`Score with name ${score.name} already exists; set canOverwriteScore to true to overwrite.`);
+            }
         }
 
         let url;
@@ -81,13 +87,6 @@ namespace dreamlo {
             url += "/" + score.text;
         }
 
-        if (!canOverwrite) {
-            const existingScore = await getScore(score.name, ScoreFormat.Pipe);
-            if (existingScore) {
-                throw new Error(`Score with name ${score.name} already exists. Set canOverwriteScore to true to overwrite.`);
-            }
-        }
-
         let result = await _get(url);
         if (format === ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard.entry;
@@ -96,7 +95,7 @@ namespace dreamlo {
     }
     export async function deleteScores(): Promise<void> {
         if (!_privateCode) {
-            throw new Error("dreamlo private code not set. Call dreamlo.initialize() first.");
+            throw new Error("privateCode not set; call dreamlo.initialize() first.");
         }
 
         const url = _baseUrl + _privateCode + "/clear";
@@ -104,10 +103,10 @@ namespace dreamlo {
     }
     export async function deleteScore(name: string): Promise<void> {
         if (!_privateCode) {
-            throw new Error("dreamlo private code not set. Call dreamlo.initialize() first.");
+            throw new Error("privateCode not set; call dreamlo.initialize() first.");
         }
         if (!name) {
-            throw new Error("dreamlo deleteScore name parameter is required.");
+            throw new Error("name parameter is required.");
         }
 
         const url = _baseUrl + _privateCode + "/delete/" + name;
