@@ -16,37 +16,51 @@ function addEventListeners() {
     $("#initializeForm").submit(function (event) {
         event.preventDefault();
         handleInitializeFormAndUpdateResponse();
-        clearForm(this);
+    });
+
+    $("#initializeFormClear").click(function () {
+        clearForm("#initializeForm");
     });
 
     $("#addScoreForm").submit(function (event) {
         event.preventDefault();
         handleAddScoreFormAndUpdateResponse();
-        clearForm(this);
+    });
+
+    $("#addScoreFormClear").click(function () {
+        clearForm("#addScoreForm");
     });
 
     $("#getScoreForm").submit(function (event) {
         event.preventDefault();
         handleGetScoreFormAndUpdateResponse();
-        clearForm(this);
+    });
+
+    $("#getScoreFormClear").click(function () {
+        clearForm("#getScoreForm");
     });
 
     $("#getScoresForm").submit(function (event) {
         event.preventDefault();
         handleGetScoresFormAndUpdateResponse();
-        clearForm(this);
+    });
+
+    $("#getScoresFormClear").click(function () {
+        clearForm("#getScoresForm");
     });
 
     $("#deleteScoreForm").submit(function (event) {
         event.preventDefault();
         handleDeleteScoreFormAndUpdateResponse();
-        clearForm(this);
+    });
+
+    $("#deleteScoreFormClear").click(function () {
+        clearForm("#deleteScoreForm");
     });
 
     $("#deleteScoresForm").submit(function (event) {
         event.preventDefault();
         handleDeleteScoresFormAndUpdateResponse();
-        clearForm(this);
     });
 
     $("#useHttpsCheckbox").change(function () {
@@ -71,7 +85,8 @@ function setDefaults() {
     dreamlo.initialize(_publicCode, _privateCode, _useHttps);
 }
 
-function clearForm(htmlElement) {
+function clearForm(id) {
+    const htmlElement = $(id);
     $(htmlElement).find(':input').each(function () {
         switch (this.type) {
             case 'password':
