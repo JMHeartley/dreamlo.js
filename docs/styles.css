@@ -18,3 +18,18 @@
 .text-purple {
     color: #8b00c5 !important;
 }
+
+.btn-purple {
+    color: #fff;
+    background-color: #8b00c5;
+    border-color: #8b00c5;
+}
+
+.btn-purple:hover {
+    color: #fff;
+    background-color: #7c01b1;
+}
+
+.btn-purple:focus {
+    box-shadow: 0 0 0 0.25rem rgba(139, 0, 197, 0.25);
+}

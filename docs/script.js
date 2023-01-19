@@ -22,6 +22,11 @@ function addEventListeners() {
         clearForm("#initializeForm");
     });
 
+    $("#resetDefaultsButton").click(function () {
+        alert("Resetting to default leaderboard.");
+        setDefaults();
+    });
+
     $("#addScoreForm").submit(function (event) {
         event.preventDefault();
         handleAddScoreFormAndUpdateResponse();
