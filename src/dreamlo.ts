@@ -142,10 +142,10 @@ namespace dreamlo {
                     expectedResult = [];
                 }
                 else if (!Array.isArray(result.entry)) {
-                    expectedResult = [result];
+                    expectedResult = [result.entry];
                 }
                 else {
-                    expectedResult = result;
+                    expectedResult = result.entry;
                 }
                 break;
             case ScoreFormat.Json:
