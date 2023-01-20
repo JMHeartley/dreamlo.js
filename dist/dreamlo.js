@@ -91,7 +91,7 @@ var dreamlo;
         if (!canOverwrite) {
             const existingScore = await getScore(score.name, dreamlo.ScoreFormat.Pipe);
             if (existingScore) {
-                throw new Error(`Score with name ${score.name} already exists; set canOverwriteScore to true to overwrite.`);
+                throw new Error(`score with name ${score.name} already exists; set canOverwriteScore to true to overwrite.`);
             }
         }
         let url;
