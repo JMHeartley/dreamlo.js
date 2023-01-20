@@ -83,7 +83,7 @@ function addEventListeners() {
 function setDefaults() {
     _publicCode = DEFAULT_PUBLIC_CODE;
     _privateCode = DEFAULT_PRIVATE_CODE;
-    _baseUrl = HTTP_BASE_URL;
+    _baseUrl = HTTPS_BASE_URL;
     _useHttps = true;
     $("#publicCodeInput").val(_publicCode);
     $("#privateCodeInput").val(_privateCode);
