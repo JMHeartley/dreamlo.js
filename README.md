@@ -158,11 +158,11 @@ The `deleteScores` function sends a request to delete all scores from the leader
     text: string
 }
 ```
-The `score` object is the data you send to the leaderboard.
+A `score` is a data object sent to the leaderboard.
 + `name`: the unique identifier for `score`s; instead of using a player's name, try a distinct value, like a [timestamp](https://www.w3docs.com/snippets/javascript/how-to-get-a-timestamp-in-javascript.html)
-+ `points`: the primary numbric value; can be used to [sort](#sorting-order) `score`s
-+ `seconds`: the secondary numbric value; can be used to [sort](#sorting-order) `score`s
-+ `text`: contains extra data relating to the `score`
++ `points`: the first numeric value that can be used to [sort multiple entries](#sorting-order)
++ `seconds`: the second numeric value that can be used to [sort multiple entries](#sorting-order); this property is optional
++ `text`: contains extra data relating to the `score`; this property is optional
 
 **TIP:** if you have lots of extra data you want to store, you can use `score.text` to save a pipe-delimited string and then decode/recode the information in your program.
 
