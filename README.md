@@ -108,7 +108,7 @@ dreamlo.getScore(name, format)
 ```
 The `getScore` function sends a request for one score and returns it in the desired format as a `string`.
 + `name`: the name value of the score to request
-+ `format`: the format type of the returned score (default format: `Object`; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned [leaderboard entry](#entry) (default format: `Object`; see [Formats](#score-formats) for all available types)
 
 ### getScores
 ```javascript
@@ -116,7 +116,7 @@ dreamlo.getScores(format, sortOrder, skip, take)
 ```
 The `getScores` function sends a request for multiple scores and returns them in desired order and format as a `string`.
 
-+ `format`: the format type of the returned score (default format: `Object[]`; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object[]`; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (default: `undefined`; retrieves all scores)
@@ -130,7 +130,7 @@ dreamlo.addScore(score, format, sortOrder, canOverwrite)
 The `addScore` function sends a request to add a score to the leaderboard and returns all scores in desired order and format as a `string`.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
-+ `format`: the format type of the returned score (default format: `Object[]`; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object[]`; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `canOverwrite`: when adding a `score` whose `score.name` is already present on the leaderboard, if this is set to `true`, the `score` with higher `score.points` is saved; if set to `false`, an `Error` is thrown (default: `false`)
 
@@ -170,8 +170,25 @@ dreamlo doesn't allow the use of the asterisk character ( * ); all occurrences w
 
 *See [Score](/src/score.ts) for this Typescript interface.*
 
+### Entry
+```javascript
+{
+    name: string,
+    score: string,
+    seconds: string,
+    text: string,
+    date: string
+}
+```
+An entry is a `score` retrieved from the leaderboard. All formats return entries with properties that have the same name; above is what one looks like using the `Object` format.
++ `name`: correlates to `score.name`
++ `score`: correlates to `score.points`
++ `seconds`: correlates to `score.seconds`
++ `text`: correlates to `score.text`
++ `date`: when the entry was last updated, in [US format](https://en.wikipedia.org/wiki/Date_and_time_notation_in_the_United_States) (`mm-dd-yyyy HH:MM:ss AM/PM`), using the [UTC timezone](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+
 ### Score Formats
-The format type of scores returned from the leaderboard can be specified using the following properties:
+The format type of entries returned from the leaderboard can be specified using the following properties:
 Format            | Property
 ------------------| ------------
 Javascript Object | `dreamLo.ScoreFormat.Object`
@@ -180,9 +197,7 @@ XML               | `dreamlo.ScoreFormat.Xml`
 Pipe-delimited    | `dreamlo.ScoreFormat.Pipe`
 Quoted with comma | `dreamlo.ScoreFormat.Quote`
 
-`Object` returns an array of scores for `addScore` and `getScores`, and a single score object for `getScore`. The remainder of the formats return scores nested within `dreamlo.leaderboard.entries`.
-
-Scores returned have the same properties as the `score` object, plus an additional `date` property that contains the timestamp when the score was updated.
+`Object` returns an array of entries for `addScore` and `getScores`, and a single entry for `getScore`. The remainder of the formats return entries nested within `dreamlo.leaderboard.entries`.
 
 *See [ScoreFormat](/src/scoreFormat.ts) for this Typescript enum.*
 
