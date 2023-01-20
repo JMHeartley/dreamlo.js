@@ -149,7 +149,7 @@ async function handleAddScoreFormAndUpdateResponse() {
 
     await dreamlo.addScore(score, format, sortOrder, canOverwrite)
         .then((data) => {
-            if (format === 'object') {
+            if (format === dreamlo.ScoreFormat.Object) {
                 data = JSON.stringify(data);
             }
             $("#responseBody-addScore").val(data);
@@ -159,8 +159,8 @@ async function handleAddScoreFormAndUpdateResponse() {
             $("#responseBody-addScore").val('');
         });
 
-    if (format === 'object') {
-        format = 'json';
+    if (format === dreamlo.ScoreFormat.Object) {
+        format = dreamlo.ScoreFormat.Json;
     }
     let url = _baseUrl + _privateCode + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
     if (score.text) {
@@ -177,7 +177,7 @@ async function handleGetScoreFormAndUpdateResponse() {
 
     await dreamlo.getScore(name, format)
         .then((data) => {
-            if (format === 'object') {
+            if (format === dreamlo.ScoreFormat.Object) {
                 data = JSON.stringify(data);
             }
             $("#responseBody-getScore").val(data);
@@ -187,8 +187,8 @@ async function handleGetScoreFormAndUpdateResponse() {
             $("#responseBody-getScore").val('');
         });
 
-    if (format === 'object') {
-        format = 'json';
+    if (format === dreamlo.ScoreFormat.Object) {
+        format = dreamlo.ScoreFormat.Json;
     }
     let url = _baseUrl + _publicCode + "/" + format + "-get/" + name;
     $('#requestUrl-getScore').val(url);
@@ -209,7 +209,7 @@ async function handleGetScoresFormAndUpdateResponse() {
 
     await dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
-            if (format == 'object') {
+            if (format == dreamlo.ScoreFormat.Object) {
                 data = JSON.stringify(data);
             }
             $("#responseBody-getScores").val(data);
@@ -219,8 +219,8 @@ async function handleGetScoresFormAndUpdateResponse() {
             $("#responseBody-getScores").val('');
         });
 
-    if (format === 'object') {
-        format = 'json';
+    if (format === dreamlo.ScoreFormat.Object) {
+        format = dreamlo.ScoreFormat.Json;
     }
     let url = _baseUrl + _publicCode + "/" + format + sortOrder + "/" + skip;
     if (take) {
