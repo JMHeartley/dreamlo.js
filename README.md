@@ -148,15 +148,22 @@ dreamlo.deleteScores()
 The `deleteScores` function sends a request to delete all scores from the leaderboard.
 
 ### Score
-The `score` object represents one score on the leaderboard and has the following properties:
 ```javascript
 {
-    name: string;
-    points: number;
-    seconds: number;    //optional
-    text: string;       //optional
+    name: string,
+    points: number,
+    seconds: number,
+    text: string
 }
 ```
+The `score` object is the data you send to the leaderboard.
++ `name`: the unique identifier for `score`s; instead of using a player's name, try a distinct value, like a [timestamp](https://www.w3docs.com/snippets/javascript/how-to-get-a-timestamp-in-javascript.html)
++ `points`: the primary numbric value; can be used to [sort](#sorting-order) `score`s
++ `seconds`: the secondary numbric value; can be used to [sort](#sorting-order) `score`s
++ `text`: contains extra data relating to the `score`
+
+**Tip:** if you have lots of extra data you want to store, you can use `score.text` to save a pipe-delimited string and then decode/recode the information in your program.
+
 dreamlo doesn't allow the use of the asterisk character ( * ); all occurrences will be replaced by the underscore character ( _ ).
 
 *See [Score](/src/score.ts) for this Typescript interface.*
