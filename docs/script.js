@@ -209,7 +209,7 @@ async function handleGetScoresFormAndUpdateResponse() {
 
     await dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
-            if (format == dreamlo.ScoreFormat.Object) {
+            if (format === dreamlo.ScoreFormat.Object) {
                 data = JSON.stringify(data);
             }
             $("#responseBody-getScores").val(data);
