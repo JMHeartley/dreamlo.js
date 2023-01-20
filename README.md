@@ -106,7 +106,7 @@ The `initialize` function sets the public and private codes and specifies whethe
 ```javascript
 dreamlo.getScore(name, format)
 ```
-The `getScore` function sends a request for one score and returns it in the desired format as a `string`.
+The `getScore` function sends a request for one leaderboard entry and returns it in the desired format as a `string`.
 + `name`: the name value of the score to request
 + `format`: the format type of the returned [leaderboard entry](#entry) (default format: `Object`; see [Formats](#score-formats) for all available types)
 
@@ -114,27 +114,27 @@ The `getScore` function sends a request for one score and returns it in the desi
 ```javascript
 dreamlo.getScores(format, sortOrder, skip, take)
 ```
-The `getScores` function sends a request for multiple scores and returns them in desired order and format as a `string`.
+The `getScores` function sends a request for multiple leaderboard entries and returns them in the specified format and order as a `string`.
 
 + `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object[]`; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (default: `undefined`; retrieves all scores)
 
-*All parameters are optional or have default values; calling with no parameters will return all scores, sorted by points in descending order, as an array of Objects.*
+*All parameters are optional or have default values; calling with no parameters will return all scores, sorted by points in descending order, as an array of objects.*
 
 ### addScore
 ```javascript
 dreamlo.addScore(score, format, sortOrder, canOverwrite)
 ```
-The `addScore` function sends a request to add a score to the leaderboard and returns all scores in desired order and format as a `string`.
+The `addScore` function sends a request to add a score to the leaderboard and returns all leaderboard entries in the specified format and order as a `string`.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
 + `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object[]`; see [Formats](#score-formats) for all available types)
 + `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
 + `canOverwrite`: when adding a `score` whose `score.name` is already present on the leaderboard, if this is set to `true`, the `score` with higher `score.points` is saved; if set to `false`, an `Error` is thrown (default: `false`)
 
-**Tip:** if updating a score on the leaderboard, set `canOverwrite` to `true`, if adding a new score, set `canOverwrite` to `false`.
+**TIP:** if updating a score on the leaderboard, set `canOverwrite` to `true`, if adding a new score, set `canOverwrite` to `false`.
 
 ### deleteScore
 ```javascript
@@ -164,7 +164,7 @@ The `score` object is the data you send to the leaderboard.
 + `seconds`: the secondary numbric value; can be used to [sort](#sorting-order) `score`s
 + `text`: contains extra data relating to the `score`
 
-**Tip:** if you have lots of extra data you want to store, you can use `score.text` to save a pipe-delimited string and then decode/recode the information in your program.
+**TIP:** if you have lots of extra data you want to store, you can use `score.text` to save a pipe-delimited string and then decode/recode the information in your program.
 
 dreamlo doesn't allow the use of the asterisk character ( * ); all occurrences will be replaced by the underscore character ( _ ).
 
@@ -202,7 +202,7 @@ Quoted with comma | `dreamlo.ScoreFormat.Quote`
 *See [ScoreFormat](/src/scoreFormat.ts) for this Typescript enum.*
 
 ### Sorting Order
-The sorting order of scores returned from the leaderboard can be specified using the following properties: 
+The sorting order of entries returned from the leaderboard can be specified using the following properties: 
 Order                 | Property
 --------------------- | ------------
 Descending by Points  | `dreamlo.SortOrder.PointsDescending`
