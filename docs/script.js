@@ -195,7 +195,7 @@ function handleGetScoresFormAndUpdateResponse() {
         skip = 0;
     }
 
-    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + take);
+    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + (take || "undefined"));
 
     dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
