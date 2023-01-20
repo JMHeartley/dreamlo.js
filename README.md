@@ -180,7 +180,7 @@ dreamlo doesn't allow the use of the asterisk character ( * ); all occurrences w
     date: string
 }
 ```
-An entry is a `score` retrieved from the leaderboard. All formats return entries with properties that have the same name; above is what one looks like using the `Object` format.
+An entry is a `score` retrieved from the leaderboard. Shown above is what it looks like with the `Object` format; `JSON` and `XML` use properties that have the same names as `Object`. `Pipe` and `Quote` don't use key-value pairs, but values are listed similarly.
 + `name`: correlates to `score.name`
 + `score`: correlates to `score.points`
 + `seconds`: correlates to `score.seconds`
