@@ -200,12 +200,9 @@ async function handleGetScoresFormAndUpdateResponse() {
     let skip = $("#skipInput-getScores").val();
     const take = $("#takeInput-getScores").val();
 
-    // if not set, give it it's default value
-    if (!skip) {
-        skip = 0;
-    }
-
-    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + (take || "undefined"));
+    alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: "
+        // if not set, show user their default values
+        + (skip || 0) + ", take: " + (take || "undefined"));
 
     await dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
