@@ -106,20 +106,43 @@ The `initialize` function sets the public and private codes and specifies whethe
 ```javascript
 dreamlo.getScore(name, format)
 ```
-The `getScore` function sends a request for one leaderboard entry and returns it in the desired format as a `string`.
+The `getScore` function sends a request for one leaderboard entry and returns it in the desired format.
 + `name`: the name value of the score to request
-+ `format`: the format type of the returned [leaderboard entry](#entry) (default format: `Object`; see [Formats](#score-formats) for all available types)
++ `format`: the format type of the returned [leaderboard entry](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties use to change formats)
+
+<details>
+<summary>Return behavior by format</summary>
+
++ `Object`: returns a single entry `object` or `null` if no entries match `score.name`
++ `JSON`: returns a single entry for `getScore` as a `string` or `null` as a `string` if no entries match `score.name`
++ `XML`: returns a single entry for `getScore` as a `string` or an empty `string` if no entries match `score.name`
++ `Pipe`: returns a single entry for `getScore` as a `string` or an empty `string` if no entries match `score.name`
++ `Quote`: returns a single entry for `getScore` as a `string` or an empty `string` if no entries match `score.name`
+</details>
+<br>
 
 ### getScores
 ```javascript
 dreamlo.getScores(format, sortOrder, skip, take)
 ```
-The `getScores` function sends a request for multiple leaderboard entries and returns them in the specified format and order as a `string`.
+The `getScores` function sends a request for multiple leaderboard entries and returns them in the specified format and order.
 
-+ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object[]`; see [Formats](#score-formats) for all available types)
-+ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
++ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties use to change formats)
++ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for which properties use to adjust orders)
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (default: `undefined`; retrieves all scores)
+
+<details>
+<summary>Return behavior by format</summary>
+
++ `Object`: returns an array of entry `object`s
++ `JSON`: returns an array of entries nested within `dreamlo.leaderboard.entry` as a `string`
++ `XML`: returns `<entry>`s nested within `<dreamlo><leaderboard></leaderboard></dreamlo>` as a `string` or `"<dreamlo></leaderboard /></dreamlo>"` if no entries are found
++ `Pipe`: returns entries with pipe-delimited values, each entry separated with a new line character as a `string` or an empty `string` if no entries are found
++ `Quote`: returns entries with double-quoted values, separated with a comma, each entry with a new line character as a `string` or an empty `string` if no entries are found
+
+</details>
+<br>
 
 *All parameters are optional or have default values; calling with no parameters will return all scores, sorted by points in descending order, as an array of objects.*
 
@@ -127,12 +150,23 @@ The `getScores` function sends a request for multiple leaderboard entries and re
 ```javascript
 dreamlo.addScore(score, format, sortOrder, canOverwrite)
 ```
-The `addScore` function sends a request to add a score to the leaderboard and returns all leaderboard entries in the specified format and order as a `string`.
+The `addScore` function sends a request to add a score to the leaderboard and returns all leaderboard entries in the specified format and order.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
-+ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object[]`; see [Formats](#score-formats) for all available types)
-+ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for all available orders)
++ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties use to change formats)
++ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for which properties use to adjust orders)
 + `canOverwrite`: when adding a `score` whose `score.name` is already present on the leaderboard, if this is set to `true`, the `score` with higher `score.points` is saved; if set to `false`, an `Error` is thrown (default: `false`)
+
+<details>
+<summary>Return behavior by format</summary>
+
++ `Object`: returns an array of entry `object`s
++ `JSON`: returns an array of entries nested within `dreamlo.leaderboard.entry` as a `string`
++ `XML`: returns `<entry>`s nested within `<dreamlo><leaderboard></leaderboard></dreamlo>` as a `string` or `"<dreamlo></leaderboard /></dreamlo>"` if no entries are found
++ `Pipe`: returns entries with pipe-delimited values, each entry separated with a new line character as a `string` or an empty `string` if no entries are found
++ `Quote`: returns entries with double-quoted values, separated with a comma, each entry with a new line character as a `string` or an empty `string` if no entries are found
+</details>
+<br>
 
 **TIP:** if updating a score on the leaderboard, set `canOverwrite` to `true`, if adding a new score, set `canOverwrite` to `false`.
 
@@ -196,8 +230,6 @@ JSON              | `dreamlo.ScoreFormat.Json`
 XML               | `dreamlo.ScoreFormat.Xml`
 Pipe-delimited    | `dreamlo.ScoreFormat.Pipe`
 Quoted with comma | `dreamlo.ScoreFormat.Quote`
-
-`Object` returns an array of entries for `addScore` and `getScores`, and a single entry for `getScore`. The remainder of the formats return entries nested within `dreamlo.leaderboard.entries`.
 
 *See [ScoreFormat](/src/scoreFormat.ts) for this Typescript enum.*
 
