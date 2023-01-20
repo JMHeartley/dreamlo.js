@@ -52,7 +52,7 @@ namespace dreamlo {
 
         let result = await _get(url);
         if (format === ScoreFormat.Object) {
-            result = JSON.parse(result).dreamlo.leaderboard.entry;
+            result = JSON.parse(result).dreamlo.leaderboard;
         }
         return _enforceExpectedResultForSingleScoreRetrieval(name, format, result);
     }
@@ -171,20 +171,31 @@ namespace dreamlo {
     // HACK: this is to get around the fact that the dreamlo API returns all scores 
     // are returned when using JSON, XML, or Quote formats instead of just the 
     // score with the matching name, no matter with the score in present or not
-    function _enforceExpectedResultForSingleScoreRetrieval(name: string, format: ScoreFormat, result: any): string {
-        let expectedResult = "";
+    function _enforceExpectedResultForSingleScoreRetrieval(name: string, format: ScoreFormat, result: any): any {
+        let expectedResult: any;
         switch (format) {
             case ScoreFormat.Object:
-                for (const score of result) {
-                    if (score.name === name) {
-                        expectedResult = score;
+                if (!result) {
+                    expectedResult = result;
+                }
+                else {
+                    for (const score of result.entry) {
+                        if (score.name === name) {
+                            expectedResult = score;
+                        }
                     }
                 }
                 break;
             case ScoreFormat.Json:
-                for (const score of JSON.parse(result).dreamlo.leaderboard.entry) {
-                    if (score.name === name) {
-                        expectedResult = JSON.stringify(score);
+                const leaderboard = JSON.parse(result).dreamlo.leaderboard;
+                if (!leaderboard) {
+                    expectedResult = JSON.stringify(leaderboard);
+                }
+                else {
+                    for (const score of leaderboard.entry) {
+                        if (score.name === name) {
+                            expectedResult = JSON.stringify(score);
+                        }
                     }
                 }
                 break;
