@@ -74,6 +74,10 @@ function addEventListeners() {
             this.checked = true;
         }
     });
+
+    $(".user-select-all").focus(function () {
+        $(this).select();
+    });
 }
 
 function setDefaults() {
