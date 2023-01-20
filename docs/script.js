@@ -134,7 +134,7 @@ function handleInitializeFormAndUpdateResponse() {
     alert("Initializing dreamlo with public code: " + _publicCode + ", private code: " + _privateCode + ", and useHttps: " + _useHttps);
 }
 
-function handleAddScoreFormAndUpdateResponse() {
+async function handleAddScoreFormAndUpdateResponse() {
     const score = {
         name: $("#scoreNameInput-addScore").val(),
         points: $("#scorePointsInput-addScore").val(),
@@ -147,8 +147,11 @@ function handleAddScoreFormAndUpdateResponse() {
 
     alert("Adding score: " + JSON.stringify(score) + "\n format: " + format + ", sortOrder: " + sortOrder + ", canOverwrite: " + canOverwrite);
 
-    dreamlo.addScore(score, format, sortOrder, canOverwrite)
+    await dreamlo.addScore(score, format, sortOrder, canOverwrite)
         .then((data) => {
+            if (format === 'object') {
+                data = JSON.stringify(data);
+            }
             $("#responseBody-addScore").val(data);
         })
         .catch((error) => {
@@ -166,14 +169,17 @@ function handleAddScoreFormAndUpdateResponse() {
     $('#requestUrl-addScore').val(url);
 }
 
-function handleGetScoreFormAndUpdateResponse() {
+async function handleGetScoreFormAndUpdateResponse() {
     const name = $("#nameInput-getScore").val();
     let format = $("#formatInput-getScore").val();
 
     alert("Getting score for name: " + name + ", format: " + format);
 
-    dreamlo.getScore(name, format)
+    await dreamlo.getScore(name, format)
         .then((data) => {
+            if (format === 'object') {
+                data = JSON.stringify(data);
+            }
             $("#responseBody-getScore").val(data);
         })
         .catch((error) => {
@@ -188,7 +194,7 @@ function handleGetScoreFormAndUpdateResponse() {
     $('#requestUrl-getScore').val(url);
 }
 
-function handleGetScoresFormAndUpdateResponse() {
+async function handleGetScoresFormAndUpdateResponse() {
     let format = $("#formatInput-getScores").val();
     const sortOrder = $("#sortOrderInput-getScores").val();
     let skip = $("#skipInput-getScores").val();
@@ -201,8 +207,11 @@ function handleGetScoresFormAndUpdateResponse() {
 
     alert("Getting scores for format: " + format + ", sortOrder: " + sortOrder + ", skip: " + skip + ", take: " + (take || "undefined"));
 
-    dreamlo.getScores(format, sortOrder, skip, take)
+    await dreamlo.getScores(format, sortOrder, skip, take)
         .then((data) => {
+            if (format == 'object') {
+                data = JSON.stringify(data);
+            }
             $("#responseBody-getScores").val(data);
         })
         .catch((error) => {
