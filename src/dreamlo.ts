@@ -17,18 +17,9 @@ namespace dreamlo {
             throw new Error("publicCode is not set; call dreamlo.initialize() first.");
         }
 
-        let url;
-        if (format === ScoreFormat.Object) {
-            url = _baseUrl + _publicCode + "/" + ScoreFormat.Json + sortOrder + "/" + skip;
-        }
-        else {
-            url = _baseUrl + _publicCode + "/" + format + sortOrder + "/" + skip;
-        }
-        if (take) {
-            url += "/" + take;
-        }
+        const requestUrl = _constructGetScoresRequestUrl(format, sortOrder, skip, take);
 
-        let result = await _get(url);
+        let result = await _get(requestUrl);
         if (format === ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard;
         }
@@ -42,15 +33,9 @@ namespace dreamlo {
             throw new Error("name parameter is required.");
         }
 
-        let url;
-        if (format === ScoreFormat.Object) {
-            url = _baseUrl + _publicCode + "/" + ScoreFormat.Json + "-get/" + name;
-        }
-        else {
-            url = _baseUrl + _publicCode + "/" + format + "-get/" + name;
-        }
+        const requestUrl = _constructGetScoreRequestUrl(name, format);
 
-        let result = await _get(url);
+        let result = await _get(requestUrl);
         if (format === ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard;
         }
@@ -73,18 +58,9 @@ namespace dreamlo {
             }
         }
 
-        let url;
-        if (format === ScoreFormat.Object) {
-            url = _baseUrl + _privateCode + "/add-" + ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
-        }
-        else {
-            url = _baseUrl + _privateCode + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
-        }
-        if (score.text) {
-            url += "/" + score.text;
-        }
+        const requestUrl = _constructAddScoreRequestUrl(score, format, sortOrder);
 
-        let result = await _get(url);
+        let result = await _get(requestUrl);
         if (format === ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard;
         }
@@ -95,8 +71,9 @@ namespace dreamlo {
             throw new Error("privateCode not set; call dreamlo.initialize() first.");
         }
 
-        const url = _baseUrl + _privateCode + "/clear";
-        await _get(url);
+        const requestUrl = _baseUrl + _privateCode + "/clear";
+
+        await _get(requestUrl);
     }
     export async function deleteScore(name: string): Promise<void> {
         if (!_privateCode) {
@@ -106,14 +83,51 @@ namespace dreamlo {
             throw new Error("name parameter is required.");
         }
 
-        const url = _baseUrl + _privateCode + "/delete/" + name;
-        await _get(url);
+        const requestUrl = _baseUrl + _privateCode + "/delete/" + name;
+
+        await _get(requestUrl);
     }
-    async function _get(url: string): Promise<string> {
+    function _constructGetScoresRequestUrl(format: ScoreFormat, sortOrder: SortOrder, skip: number, take?: number): string {
+        let requestUrl;
+        if (format === ScoreFormat.Object) {
+            requestUrl = _baseUrl + _publicCode + "/" + ScoreFormat.Json + sortOrder + "/" + skip;
+        }
+        else {
+            requestUrl = _baseUrl + _publicCode + "/" + format + sortOrder + "/" + skip;
+        }
+        if (take) {
+            requestUrl += "/" + take;
+        }
+        return requestUrl;
+    }
+    function _constructGetScoreRequestUrl(name: string, format: ScoreFormat): string {
+        let requestUrl;
+        if (format === ScoreFormat.Object) {
+            requestUrl = _baseUrl + _publicCode + "/" + ScoreFormat.Json + "-get/" + name;
+        }
+        else {
+            requestUrl = _baseUrl + _publicCode + "/" + format + "-get/" + name;
+        }
+        return requestUrl;
+    }
+    function _constructAddScoreRequestUrl(score: Score, format: ScoreFormat, sortOrder: SortOrder): string {
+        let requestUrl;
+        if (format === ScoreFormat.Object) {
+            requestUrl = _baseUrl + _privateCode + "/add-" + ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+        }
+        else {
+            requestUrl = _baseUrl + _privateCode + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + (score.seconds ?? 0);
+        }
+        if (score.text) {
+            requestUrl += "/" + score.text;
+        }
+        return requestUrl;
+    }
+    async function _get(requestUrl: string): Promise<string> {
         let data = "";
         // dreamlo Docs: You can not have an asterisk * character in your URL, scores, usernames, etc.
-        url = url.replace(/\*/gi, "_");
-        await fetch(url)
+        requestUrl = requestUrl.replace(/\*/gi, "_");
+        await fetch(requestUrl)
             .then((response) => {
                 if (!response.ok) {
                     const error = response.status + " " + response.statusText;

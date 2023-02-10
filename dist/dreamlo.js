@@ -39,17 +39,8 @@ var dreamlo;
         if (!_publicCode) {
             throw new Error("publicCode is not set; call dreamlo.initialize() first.");
         }
-        let url;
-        if (format === dreamlo.ScoreFormat.Object) {
-            url = _baseUrl + _publicCode + "/" + dreamlo.ScoreFormat.Json + sortOrder + "/" + skip;
-        }
-        else {
-            url = _baseUrl + _publicCode + "/" + format + sortOrder + "/" + skip;
-        }
-        if (take) {
-            url += "/" + take;
-        }
-        let result = await _get(url);
+        const requestUrl = _constructGetScoresRequestUrl(format, sortOrder, skip, take);
+        let result = await _get(requestUrl);
         if (format === dreamlo.ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard;
         }
@@ -63,14 +54,8 @@ var dreamlo;
         if (!name) {
             throw new Error("name parameter is required.");
         }
-        let url;
-        if (format === dreamlo.ScoreFormat.Object) {
-            url = _baseUrl + _publicCode + "/" + dreamlo.ScoreFormat.Json + "-get/" + name;
-        }
-        else {
-            url = _baseUrl + _publicCode + "/" + format + "-get/" + name;
-        }
-        let result = await _get(url);
+        const requestUrl = _constructGetScoreRequestUrl(name, format);
+        let result = await _get(requestUrl);
         if (format === dreamlo.ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard;
         }
@@ -78,7 +63,6 @@ var dreamlo;
     }
     dreamlo.getScore = getScore;
     async function addScore(score, format = dreamlo.ScoreFormat.Object, sortOrder = dreamlo.SortOrder.PointsDescending, canOverwrite = false) {
-        var _a, _b;
         if (!_privateCode) {
             throw new Error("privateCode not set; call dreamlo.initialize() first.");
         }
@@ -94,17 +78,8 @@ var dreamlo;
                 throw new Error(`score with name ${score.name} already exists; set canOverwriteScore to true to overwrite.`);
             }
         }
-        let url;
-        if (format === dreamlo.ScoreFormat.Object) {
-            url = _baseUrl + _privateCode + "/add-" + dreamlo.ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + ((_a = score.seconds) !== null && _a !== void 0 ? _a : 0);
-        }
-        else {
-            url = _baseUrl + _privateCode + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + ((_b = score.seconds) !== null && _b !== void 0 ? _b : 0);
-        }
-        if (score.text) {
-            url += "/" + score.text;
-        }
-        let result = await _get(url);
+        const requestUrl = _constructAddScoreRequestUrl(score, format, sortOrder);
+        let result = await _get(requestUrl);
         if (format === dreamlo.ScoreFormat.Object) {
             result = JSON.parse(result).dreamlo.leaderboard;
         }
@@ -115,8 +90,8 @@ var dreamlo;
         if (!_privateCode) {
             throw new Error("privateCode not set; call dreamlo.initialize() first.");
         }
-        const url = _baseUrl + _privateCode + "/clear";
-        await _get(url);
+        const requestUrl = _baseUrl + _privateCode + "/clear";
+        await _get(requestUrl);
     }
     dreamlo.deleteScores = deleteScores;
     async function deleteScore(name) {
@@ -126,14 +101,51 @@ var dreamlo;
         if (!name) {
             throw new Error("name parameter is required.");
         }
-        const url = _baseUrl + _privateCode + "/delete/" + name;
-        await _get(url);
+        const requestUrl = _baseUrl + _privateCode + "/delete/" + name;
+        await _get(requestUrl);
     }
     dreamlo.deleteScore = deleteScore;
-    async function _get(url) {
+    function _constructGetScoresRequestUrl(format, sortOrder, skip, take) {
+        let requestUrl;
+        if (format === dreamlo.ScoreFormat.Object) {
+            requestUrl = _baseUrl + _publicCode + "/" + dreamlo.ScoreFormat.Json + sortOrder + "/" + skip;
+        }
+        else {
+            requestUrl = _baseUrl + _publicCode + "/" + format + sortOrder + "/" + skip;
+        }
+        if (take) {
+            requestUrl += "/" + take;
+        }
+        return requestUrl;
+    }
+    function _constructGetScoreRequestUrl(name, format) {
+        let requestUrl;
+        if (format === dreamlo.ScoreFormat.Object) {
+            requestUrl = _baseUrl + _publicCode + "/" + dreamlo.ScoreFormat.Json + "-get/" + name;
+        }
+        else {
+            requestUrl = _baseUrl + _publicCode + "/" + format + "-get/" + name;
+        }
+        return requestUrl;
+    }
+    function _constructAddScoreRequestUrl(score, format, sortOrder) {
+        var _a, _b;
+        let requestUrl;
+        if (format === dreamlo.ScoreFormat.Object) {
+            requestUrl = _baseUrl + _privateCode + "/add-" + dreamlo.ScoreFormat.Json + sortOrder + "/" + score.name + "/" + score.points + "/" + ((_a = score.seconds) !== null && _a !== void 0 ? _a : 0);
+        }
+        else {
+            requestUrl = _baseUrl + _privateCode + "/add-" + format + sortOrder + "/" + score.name + "/" + score.points + "/" + ((_b = score.seconds) !== null && _b !== void 0 ? _b : 0);
+        }
+        if (score.text) {
+            requestUrl += "/" + score.text;
+        }
+        return requestUrl;
+    }
+    async function _get(requestUrl) {
         let data = "";
-        url = url.replace(/\*/gi, "_");
-        await fetch(url)
+        requestUrl = requestUrl.replace(/\*/gi, "_");
+        await fetch(requestUrl)
             .then((response) => {
             if (!response.ok) {
                 const error = response.status + " " + response.statusText;
