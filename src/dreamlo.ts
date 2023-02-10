@@ -120,7 +120,7 @@ namespace dreamlo {
                     return Promise.reject(error);
                 }
 
-                return response.text()
+                return response.text();
             })
             .then((text) => {
                 data = text;
@@ -213,28 +213,30 @@ namespace dreamlo {
                 expectedResult = result;
                 break;
             case ScoreFormat.Quote:
-                const scoreArrays = _decodeQuoteWithCommaStringAsScoreArrays(result);
-                for (const scoreArray of scoreArrays) {
-                    if (scoreArray[0] === `"${name}"`) {
-                        expectedResult = _recodeScoreArrayAsQuoteWithCommaString(scoreArray);
+                const multipleScoresAsArrays = _convertQuoteWithCommaStringToMultipleScoresAsArrays(result);
+                for (const singleScoreAsArray of multipleScoresAsArrays) {
+                    if (singleScoreAsArray[0] === `"${name}"`) {
+                        expectedResult = _convertSingleScoreAsArrayToQuoteWithCommaString(singleScoreAsArray);
                     }
                 }
                 break;
         }
         return expectedResult;
     }
-    function _decodeQuoteWithCommaStringAsScoreArrays(quoteWithCommaString: string): string[][] {
+    function _convertQuoteWithCommaStringToMultipleScoresAsArrays(quoteWithCommaString: string): string[][] {
         let scoreArrays: string[][] = [];
-        quoteWithCommaString.split("\n").forEach((score) => {
-            scoreArrays.push(score.split(","));
+        const scores = quoteWithCommaString.split("\n");
+        scores.forEach((score) => {
+            const scoreArray = score.split(",");
+            scoreArrays.push(scoreArray);
         });
         return scoreArrays;
     }
-    function _recodeScoreArrayAsQuoteWithCommaString(scoreArray: string[]): string {
+    function _convertSingleScoreAsArrayToQuoteWithCommaString(singleScoreAsArray: string[]): string {
         let quoteWithCommaString = "";
-        for (let index = 0; index < scoreArray.length; index++) {
-            quoteWithCommaString += scoreArray[index];
-            if (index !== scoreArray.length - 1) {
+        for (let index = 0; index < singleScoreAsArray.length; index++) {
+            quoteWithCommaString += singleScoreAsArray[index];
+            if (index !== singleScoreAsArray.length - 1) {
                 quoteWithCommaString += ",";
             }
         }
