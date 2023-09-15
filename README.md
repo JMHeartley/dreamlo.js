@@ -108,7 +108,7 @@ dreamlo.getScore(name, format)
 ```
 The `getScore` function sends a request for one leaderboard entry and returns it in the desired format.
 + `name`: the name value of the score to request
-+ `format`: the format type of the returned [leaderboard entry](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties use to change formats)
++ `format`: the format type of the returned [leaderboard entry](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties are used to change formats)
 
 <details>
 <summary>Return behavior by format</summary>
@@ -127,8 +127,8 @@ dreamlo.getScores(format, sortOrder, skip, take)
 ```
 The `getScores` function sends a request for multiple leaderboard entries and returns them in the specified format and order.
 
-+ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties use to change formats)
-+ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for which properties use to adjust orders)
++ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties are used to change formats)
++ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for which properties are used to adjust orders)
 + `skip`: the score rank you want to start sorting at (default: `0`; zero-based index)
 + `take`: the number of scores you want to retrieve (default: `undefined`; retrieves all scores)
 
@@ -153,8 +153,8 @@ dreamlo.addScore(score, format, sortOrder, canOverwrite)
 The `addScore` function sends a request to add a score to the leaderboard and returns all leaderboard entries in the specified format and order.
 
 + `score`: the score to add to the leaderboard (see [Score](#score) for the expected shape of this object)
-+ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties use to change formats)
-+ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for which properties use to adjust orders)
++ `format`: the format type of the returned [leaderboard entries](#entry) (default format: `Object`; see [Formats](#score-formats) for which properties are used to change formats)
++ `sortOrder`: the sorting order of the retrieved scores (default order: Descending by Points; see [Sorting Order](#sorting-order) for which properties are used to adjust orders)
 + `canOverwrite`: when adding a `score` whose `score.name` is already present on the leaderboard, if this is set to `true`, the `score` with higher `score.points` is saved; if set to `false`, an `Error` is thrown (default: `false`)
 
 <details>
@@ -174,7 +174,7 @@ The `addScore` function sends a request to add a score to the leaderboard and re
 ```javascript
 dreamlo.deleteScore(name)
 ```
-The `deleteScore` function sends a request to to delete one score from the leaderboard.
+The `deleteScore` function sends a request to delete one score from the leaderboard.
 + `name`: the name value of the score to delete
 
 ### deleteScores
@@ -260,7 +260,7 @@ for the game engine so anyone can effortlessly add a leaderboard to their games.
 Previously, I used the dreamlo game asset for [the game my team built for the GTMK 2020 game jam.](https://github.com/JMHeartley/Work-With-Me-Here)
 
 Years later, I started sprucing up [an old TicTacToe game I made years ago](https://github.com/JMHeartley/TicTacToe)
-and wanted to add a leaderboard. The first thing that came to mind was dreamlo, but there was a problem, the script for dreamlo that comes with the Unity game asset was written in C#.
+and wanted to add a leaderboard. The first thing that came to mind was dreamlo, but there was a problem: the script for dreamlo that comes with the Unity game asset was written in C#.
 
 I created this script because any game that can make HTTP requests can use dreamlo. Happily, I've extended Carmine's original dream(lo) to Javascript 😊
 
