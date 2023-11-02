@@ -37,7 +37,7 @@ Using dreamlo.js for your game's leaderboard? Send me a message with a link and 
 ## ⚙️ Demo
 Are you new to dreamlo? Want to test it out without having to commit? 😕
 
-Just use the Swagger UI-like [demo page](https://JMHeartley.github.io/dreamlo.js/) to test requests and retrieve leaderboard data 😎
+Just use the [Swagger UI](https://swagger.io/tools/swagger-ui/)-like [demo page](https://JMHeartley.github.io/dreamlo.js/) to test requests and retrieve leaderboard data 😎
 
 
 
